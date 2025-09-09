@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 import OneRepMaxInput from './components/OneRepMaxInput';
@@ -8,10 +8,31 @@ import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
 
 function App() {
-  const [oneRepMax, setOneRepMax] = useState(70);
-  const [rounding, setRounding] = useState(0.5);
+  const [oneRepMax, setOneRepMax] = useState(() => {
+    const stored = localStorage.getItem('oneRepMax');
+    return stored ? Number(stored) : 70;
+  });
+  const [rounding, setRounding] = useState(() => {
+    const stored = localStorage.getItem('rounding');
+    return stored ? Number(stored) : 0.5;
+  });
   const [selectedPercentage, setSelectedPercentage] = useState(70);
-  const [savedPercentages, setSavedPercentages] = useState([]);
+  const [savedPercentages, setSavedPercentages] = useState(() => {
+    const stored = localStorage.getItem('savedPercentages');
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('oneRepMax', oneRepMax);
+  }, [oneRepMax]);
+
+  useEffect(() => {
+    localStorage.setItem('rounding', rounding);
+  }, [rounding]);
+
+  useEffect(() => {
+    localStorage.setItem('savedPercentages', JSON.stringify(savedPercentages));
+  }, [savedPercentages]);
 
   const handleSavePercentage = (percent) => {
     if (!savedPercentages.includes(percent)) {
