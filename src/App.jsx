@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+
+import OneRepMaxInput from './components/OneRepMaxInput';
+import RoundingSelector from './components/RoundingSelector';
+import PercentageList from './components/PercentageList';
+import PercentageDetail from './components/PercentageDetail';
+import SavedPercentages from './components/SavedPercentages';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [oneRepMax, setOneRepMax] = useState(70);
+  const [rounding, setRounding] = useState(0.5);
+  const [selectedPercentage, setSelectedPercentage] = useState(70);
+  const [savedPercentages, setSavedPercentages] = useState([]);
+
+  const handleSavePercentage = (percent) => {
+    if (!savedPercentages.includes(percent)) {
+      setSavedPercentages([...savedPercentages, percent].sort((a, b) => a - b));
+    }
+  };
+
+  const handleRemovePercentage = (percent) => {
+    setSavedPercentages(savedPercentages.filter((p) => p !== percent));
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>Weight Calculator</h1>
+      <div className='input-container'>
+        <OneRepMaxInput value={oneRepMax} onChange={setOneRepMax} />
+        <RoundingSelector rounding={rounding} onChange={setRounding} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      <div className='percentage-container'>
+        <PercentageList
+          onSelect={setSelectedPercentage}
+          oneRepMax={oneRepMax}
+          rounding={rounding}
+        />
+        <PercentageDetail
+          percentage={selectedPercentage}
+          oneRepMax={oneRepMax}
+          rounding={rounding}
+          onSave={handleSavePercentage}
+        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <SavedPercentages
+        oneRepMax={oneRepMax}
+        percentages={savedPercentages}
+        onRemove={handleRemovePercentage}
+        rounding={rounding}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
