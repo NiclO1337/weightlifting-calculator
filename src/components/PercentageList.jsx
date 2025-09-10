@@ -9,7 +9,7 @@ export default function PercentageList({
 }) {
   const percentages = [50, 60, 70, 80, 90, 100, 110];
   return (
-    <div className='percentages'>
+    <div className='percentages-list'>
       <ul>
         {percentages.map((p) => (
           <li key={p}>

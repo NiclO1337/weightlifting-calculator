@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CircleQuestionMark } from 'lucide-react';
 import './App.css';
 
 import OneRepMaxInput from './components/OneRepMaxInput';
@@ -6,6 +7,7 @@ import RoundingSelector from './components/RoundingSelector';
 import PercentageList from './components/PercentageList';
 import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
+import TutorialDriver from './components/TutorialDriver';
 
 function App() {
   const [oneRepMax, setOneRepMax] = useState(() => {
@@ -16,11 +18,13 @@ function App() {
     const stored = localStorage.getItem('rounding');
     return stored ? Number(stored) : 0.5;
   });
-  const [selectedPercentage, setSelectedPercentage] = useState(70);
   const [savedPercentages, setSavedPercentages] = useState(() => {
     const stored = localStorage.getItem('savedPercentages');
     return stored ? JSON.parse(stored) : [];
   });
+
+  const [selectedPercentage, setSelectedPercentage] = useState(70);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('oneRepMax', oneRepMax);
@@ -72,6 +76,11 @@ function App() {
         onRemove={handleRemovePercentage}
         rounding={rounding}
       />
+      <button onClick={() => setShowTutorial(true)}>
+        <CircleQuestionMark />
+        <span className="visually-hidden">Start Tutorial</span>
+        <TutorialDriver start={showTutorial} />
+      </button>
     </>
   );
 }
