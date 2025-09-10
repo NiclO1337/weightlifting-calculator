@@ -46,7 +46,7 @@ function App() {
 
   return (
     <>
-      <h1>Weight Calculator</h1>
+      <h1 className="special-font">Weightlifting <br /> Calculator</h1>
       <div className='input-container'>
         <OneRepMaxInput value={oneRepMax} onChange={setOneRepMax} />
         <RoundingSelector rounding={rounding} onChange={setRounding} />
@@ -57,6 +57,7 @@ function App() {
           onSelect={setSelectedPercentage}
           oneRepMax={oneRepMax}
           rounding={rounding}
+          selectedPercentage={selectedPercentage}
         />
         <PercentageDetail
           percentage={selectedPercentage}

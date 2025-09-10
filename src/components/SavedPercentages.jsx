@@ -9,8 +9,7 @@ export default function SavedPercentages({
   if (percentages.length === 0)
     return <div className='saved-percentages'>No saved percentages</div>;
   return (
-    <div className='saved-percentages'>
-      <h2>Saved Percentages</h2>
+    <div className='saved-percentages special-font'>
       <ul>
         {percentages.map((p) => (
           <li key={p} onClick={() => onRemove(p)}>
