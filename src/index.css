@@ -3,9 +3,13 @@
   line-height: 1.5;
   font-weight: 400;
 
+  --color-primary-dark: #071b44;
+  --color-primary-light: #b7d5e6d3;
+  --color-primary-hover: #83d8ff;
+
   color-scheme: light dark;
-  color: #ccefffde;
-  background-color: #04275c;
+  color: var(--color-primary-light);
+  background-color: var(--color-primary-dark);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,7 +23,7 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-primary-hover);
 }
 
 body {
@@ -27,11 +31,20 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url('/pexels-messina-photo-61078602-8170745.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 1.8em;
   line-height: 1.1;
+}
+
+.special-font {
+  font-family: "Alfa Slab One", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 button {
@@ -41,12 +54,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #041c3f;
+  background-color: var(--color-primary-dark);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-primary-hover);
 }
 button:focus,
 button:focus-visible {
@@ -54,24 +67,56 @@ button:focus-visible {
 }
 
 .percentages button {
-  background-color: none;
+  background-color: transparent;
+  color: var(--color-primary-dark);
   border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.4em 0;
+}
+
+.arrow {
+  padding-left: 0.4em;
+  vertical-align: middle;
+}
+
+.percentages button:hover,
+.percentages-detail li:hover,
+.saved-percentages li:hover {
+  color: var(--color-primary-hover);
+}
+.percentages button:focus,
+.percentages button:focus-visible {
+  outline: 0cap;
+}
+
+.saved-percentages {
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow:
+    -1px -1px 0 #070f20,
+     1px -1px 0 #070f20,
+    -1px  1px 0 #070f20,
+     1px  1px 0 #070f20;
 }
 
 label {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: 500;
+  display: block;
 }
 
-input, select {
+input,
+select {
   font-size: 1em;
   font-family: inherit;
   font-weight: bold;
   padding: 0.4em 0.8em;
   border: 1px solid #888;
   border-radius: 8px;
-  background-color: rgba(204, 239, 255, 0.87);
-  color: #04275c;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
   text-align: center;
   margin: 0 0.5em;
   width: 3em;
@@ -81,12 +126,12 @@ select {
   width: auto;
 }
 option {
-  padding: 0
+  padding: 0;
 }
 
 li {
   list-style-type: none;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 ul {
@@ -96,23 +141,50 @@ ul {
 
 .input-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 2em;
-  margin: 2em;
+  margin: 1em auto;
+  width: 80%;
+  max-width: 400px;
+}
+
+.input-group,
+.rounding-selector {
+  width: 40%;
+}
+
+svg {
+  width: 15px;
 }
 
 .percentage-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   text-align: left;
-  gap: 5em;
-  margin: 2em;
-  padding: 1em;
-  background-color: #ccefffde;
-  color: #041c3f;
-  border-radius: 2rem;
+  gap: 1em;
+  padding: 0.2em 0.5em;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: 1rem;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 400px;
+}
+
+.percentage-container ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.percentages {
+  border-right: 1px solid var(--color-primary-dark);
+  width: 50%;
+}
+
+.percentages-detail {
+  width: 40%;
 }
 
 @media (prefers-color-scheme: light) {
@@ -125,5 +197,32 @@ ul {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media (min-width: 375px) {
+  .input-container {
+    gap: 3em;
+  }
+
+  .percentage-container {
+    gap: 1em;
+    padding: 0.6em 1em;
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) {
+  .percentages button {
+    font-size: 1.2rem;
+  }
+  .percentages button {
+    padding: 0.4em 0 0.4em 1em;
+  }
+  h1 {
+    font-size: 2.5em;
+  }
+  svg {
+    width: 20px;
   }
 }
