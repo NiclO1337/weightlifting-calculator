@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
-import { CircleQuestionMark } from 'lucide-react';
 import './App.css';
 
+import Header from './components/Header';
 import OneRepMaxInput from './components/OneRepMaxInput';
 import RoundingSelector from './components/RoundingSelector';
 import PercentageList from './components/PercentageList';
 import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
-import TutorialDriver from './components/TutorialDriver';
 
 function App() {
   const [oneRepMax, setOneRepMax] = useState(() => {
@@ -50,7 +49,8 @@ function App() {
 
   return (
     <>
-      <h1 className="special-font">Weightlifting <br /> Calculator</h1>
+      <Header showTutorial={showTutorial} setShowTutorial={setShowTutorial} />
+
       <div className='input-container'>
         <OneRepMaxInput value={oneRepMax} onChange={setOneRepMax} />
         <RoundingSelector rounding={rounding} onChange={setRounding} />
@@ -76,11 +76,6 @@ function App() {
         onRemove={handleRemovePercentage}
         rounding={rounding}
       />
-      <button onClick={() => setShowTutorial(true)}>
-        <CircleQuestionMark />
-        <span className="visually-hidden">Start Tutorial</span>
-        <TutorialDriver start={showTutorial} />
-      </button>
     </>
   );
 }

@@ -17,7 +17,7 @@ export default function PercentageList({
               {p}% - {roundToIncrement((oneRepMax * p) / 100, rounding)} kg
             </button>
             <span className='arrow'>
-              {selectedPercentage === p && <MoveRight size={20}  />}
+              {selectedPercentage === p && <MoveRight size={16}  />}
             </span>
           </li>
         ))}

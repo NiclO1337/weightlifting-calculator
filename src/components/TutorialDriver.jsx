@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
 
-export default function TutorialDriver({ start }) {
+export default function TutorialDriver({ start, onClose }) {
   useEffect(() => {
     if (start) {
       const driverObj = driver({
@@ -11,8 +11,8 @@ export default function TutorialDriver({ start }) {
           {
             element: '.input-group',
             popover: {
-              title: 'One Rep Max Input',
-              description: 'Enter your one rep max weight here for the current exercise.',
+              title: '1 Rep Max',
+              description: 'Enter your 1 rep max weight here for the current lifting technique.',
               position: 'bottom',
             },
           },
@@ -20,7 +20,7 @@ export default function TutorialDriver({ start }) {
             element: '.rounding-selector',
             popover: {
               title: 'Rounding Selector',
-              description: 'Select the rounding option for your calculations depending on your preference.',
+              description: 'Select the rounding option for your calculations depending on your preference and weight plate availability.',
               position: 'bottom',
             },
           },
@@ -29,7 +29,7 @@ export default function TutorialDriver({ start }) {
             popover: {
               title: 'Percentage List',
               description:
-                'Overview of the calculated percentages, select one to view details.',
+                'Overview of the calculated percentages, select one to view range in detail.',
               position: 'bottom',
             },
           },
@@ -47,13 +47,17 @@ export default function TutorialDriver({ start }) {
             popover: {
               title: 'Saved Percentages',
               description:
-                'View and manage your saved percentage calculations here for your current workout. Click on them to remove them from the list.',
+                'View and manage your saved percentage calculations here for your current lift. Click on them to remove them from the list.',
               position: 'bottom',
             },
           },
-        ]
+        ],
+        onDestroyed: onClose,
+        onReset: onClose,
+
       });
       driverObj.drive();
     }
-  }, [start]);
+  }, [start, onClose]);
+  return null;
 }
