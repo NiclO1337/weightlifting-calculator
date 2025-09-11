@@ -104,10 +104,15 @@ h1 {
 
 .saved-percentages {
   margin-top: 1rem;
-  font-size: 2rem;
+  font-size: 1.3rem;
   font-weight: bold;
   text-shadow: -1px -1px 0 #070f20, 1px -1px 0 #070f20, -1px 1px 0 #070f20,
     1px 1px 0 #070f20;
+}
+
+.text-smaller {
+  font-size: 1rem;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 label {
@@ -154,13 +159,8 @@ ul {
   align-items: center;
   margin: 1rem auto;
   margin-top: 0;
-  width: 80%;
+  width: 100%;
   max-width: 400px;
-}
-
-.input-group,
-.rounding-selector {
-  width: 40%;
 }
 
 .percentage-container {
@@ -221,12 +221,12 @@ ul {
 }
 
 @media (min-width: 375px) {
-  .input-container {
-    gap: 3em;
-  }
-  .percentage-container {
+    .percentage-container {
     gap: 1em;
     padding: 0.6em 1em;
+    width: 80%;
+  }
+  .input-container {
     width: 80%;
   }
   .question-icon {

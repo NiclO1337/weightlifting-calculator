@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import OneRepMaxInput from './components/OneRepMaxInput';
 import RoundingSelector from './components/RoundingSelector';
+import BarbellSelector from './components/BarbellSelector';
 import PercentageList from './components/PercentageList';
 import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
@@ -16,6 +17,10 @@ function App() {
   const [rounding, setRounding] = useState(() => {
     const stored = localStorage.getItem('rounding');
     return stored ? Number(stored) : 0.5;
+  });
+  const [barbellWeight, setBarbellWeight] = useState(() => {
+    const stored = localStorage.getItem('barbellWeight');
+    return stored ? Number(stored) : 15;
   });
   const [savedPercentages, setSavedPercentages] = useState(() => {
     const stored = localStorage.getItem('savedPercentages');
@@ -32,6 +37,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem('rounding', rounding);
   }, [rounding]);
+
+  useEffect(() => {
+    localStorage.setItem('barbellWeight', barbellWeight);
+  }, [barbellWeight]);
 
   useEffect(() => {
     localStorage.setItem('savedPercentages', JSON.stringify(savedPercentages));
@@ -54,6 +63,10 @@ function App() {
       <div className='input-container'>
         <OneRepMaxInput value={oneRepMax} onChange={setOneRepMax} />
         <RoundingSelector rounding={rounding} onChange={setRounding} />
+        <BarbellSelector
+          barbellWeight={barbellWeight}
+          onChange={setBarbellWeight}
+        />
       </div>
 
       <div className='percentage-container'>
@@ -75,6 +88,7 @@ function App() {
         percentages={savedPercentages}
         onRemove={handleRemovePercentage}
         rounding={rounding}
+        barbellWeight={barbellWeight}
       />
     </>
   );
