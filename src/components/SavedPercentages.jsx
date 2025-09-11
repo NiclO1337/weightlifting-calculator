@@ -20,7 +20,7 @@ export default function SavedPercentages({
           return (
             <li key={p} onClick={() => onRemove(p)}>
               {p}% - {totalWeight} kg
-              <span className='text-smaller'> ({plates.join(', ')})</span>
+              <span className='text-smaller'><br/>( {plates.join(', ')} )</span>
             </li>
           );
         })}
