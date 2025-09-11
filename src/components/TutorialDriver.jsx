@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
 
-export default function TutorialDriver({ start, onClose }) {
-  useEffect(() => {
-    if (start) {
+
+const TutorialDriver = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => ({
+    start() {
       const driverObj = driver({
         showProgress: true,
         steps: [
@@ -28,7 +29,7 @@ export default function TutorialDriver({ start, onClose }) {
             element: '.rounding-selector',
             popover: {
               title: 'Rounding Selector',
-              description: 'Select the rounding option for your calculations depending on your preference and weight plate availability.',
+              description: 'Select the rounding option for your calculations depending on your preference or weight plate availability.',
               position: 'bottom',
             },
           },
@@ -63,16 +64,16 @@ export default function TutorialDriver({ start, onClose }) {
             popover: {
               title: 'Saved Percentages',
               description:
-                'View and manage your saved percentage calculations here for your current lift. Also displays the weight plates you need per side to load your barbell. Click on them to remove them from the list.',
+                'View and manage your saved percentage calculations for your current lift. You’ll also see which weight plates to load on each side of the barbell. Click any percentage to remove it from the list.',
               position: 'bottom',
             },
           },
         ],
-        onDestroyed: onClose,
-        onReset: onClose,
       });
       driverObj.drive();
     }
-  }, [start, onClose]);
+  }));
   return null;
-}
+});
+
+export default TutorialDriver;
