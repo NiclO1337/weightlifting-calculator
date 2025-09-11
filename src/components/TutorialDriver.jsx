@@ -9,6 +9,14 @@ export default function TutorialDriver({ start, onClose }) {
         showProgress: true,
         steps: [
           {
+            element: '.header-row',
+            popover: {
+              title: 'Weightlifting Calculator',
+              description: 'Welcome to the super duper awesome weightlifting calculator. Perfect for anyone who loves lifting weights and hates math!',
+              position: 'bottom',
+            },
+          },
+          {
             element: '.input-group',
             popover: {
               title: '1 Rep Max',
@@ -21,6 +29,14 @@ export default function TutorialDriver({ start, onClose }) {
             popover: {
               title: 'Rounding Selector',
               description: 'Select the rounding option for your calculations depending on your preference and weight plate availability.',
+              position: 'bottom',
+            },
+          },
+          {
+            element: '.barbell-selector',
+            popover: {
+              title: 'Barbell Selector',
+              description: 'Select the weight of your barbell here. This will be used to calculate the plates needed for your lifts.',
               position: 'bottom',
             },
           },
@@ -38,7 +54,7 @@ export default function TutorialDriver({ start, onClose }) {
             popover: {
               title: 'Percentage Detail',
               description:
-                'View detailed calculations from the selected range here. You can click on percentages to save them to the list below for faster access.',
+                'View detailed calculations from the selected range here. You can click on percentages to save them to the list below for faster access and also see the plates needed to load your barbell.',
               position: 'bottom',
             },
           },
@@ -47,14 +63,13 @@ export default function TutorialDriver({ start, onClose }) {
             popover: {
               title: 'Saved Percentages',
               description:
-                'View and manage your saved percentage calculations here for your current lift. Click on them to remove them from the list.',
+                'View and manage your saved percentage calculations here for your current lift. Also displays the weight plates you need per side to load your barbell. Click on them to remove them from the list.',
               position: 'bottom',
             },
           },
         ],
         onDestroyed: onClose,
         onReset: onClose,
-
       });
       driverObj.drive();
     }
