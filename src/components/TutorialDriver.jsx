@@ -21,7 +21,7 @@ const TutorialDriver = forwardRef((props, ref) => {
             element: '.input-group',
             popover: {
               title: '1 Rep Max',
-              description: 'Enter your 1 rep max weight here for the current lifting technique. Must be between 0 and 550 kg or it will not be accepted.',
+              description: 'Enter your 1 rep max weight here for the current lifting technique. Must be between 0 and 550 kg or it will not calculate.',
               position: 'bottom',
             },
           },
