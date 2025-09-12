@@ -98,12 +98,12 @@ h1 {
 }
 
 .saved-percentages {
-  margin-top: 1rem;
   font-size: 1.5rem;
   font-weight: bold;
   text-shadow: -1px -1px 0 #070f20, 1px -1px 0 #070f20, -1px 1px 0 #070f20,
     1px 1px 0 #070f20;
-    width: auto;
+  max-width: 400px;
+  margin: 1rem auto;
 }
 
 .text-smaller {
@@ -204,7 +204,7 @@ ul {
   a:hover,
   .percentages-list button:hover,
   .percentages-detail li:hover,
-  .saved-percentages span:hover,
+  .saved-percentages li:hover,
   #driver-popover-content .driver-popover-close-btn:hover {
     color: var(--color-primary-hover);
   }
