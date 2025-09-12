@@ -24,7 +24,7 @@ function App() {
   });
   const [savedPercentages, setSavedPercentages] = useState(() => {
     const stored = localStorage.getItem('savedPercentages');
-    return stored ? JSON.parse(stored) : [];
+    return stored ? JSON.parse(stored) : [73, 77, 81];
   });
 
   const [selectedPercentage, setSelectedPercentage] = useState(70);

@@ -3,13 +3,13 @@
   line-height: 1.5;
   font-weight: 400;
 
-  --color-primary-dark: #071b44;
+  --color-primary-dark: #070f20;
   --color-primary-light: #b7d5e6d3;
   --color-primary-hover: #83d8ff;
 
   color-scheme: light dark;
   color: var(--color-primary-light);
-  background-color: var(--color-primary-dark);
+  background-color: transparent;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -215,7 +215,7 @@ ul {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: var(--color-primary-hover);
   }
   button {
     background-color: #f9f9f9;
