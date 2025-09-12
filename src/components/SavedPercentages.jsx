@@ -1,5 +1,5 @@
 import { roundToIncrement } from '../utils/math';
-import { getPlatesPerSide } from '../utils/plates';
+import { getPlatesPerSide, formatPlates } from '../utils/plates';
 
 export default function SavedPercentages({
   oneRepMax = 70,
@@ -16,11 +16,12 @@ export default function SavedPercentages({
       <ul>
         {percentages.map((p) => {
           const totalWeight = roundToIncrement((oneRepMax * p) / 100, rounding);
-          const plates = getPlatesPerSide(totalWeight, barbellWeight);
+          const platesPerSide = getPlatesPerSide(totalWeight, barbellWeight);
+
           return (
             <li key={p} onClick={() => onRemove(p)}>
               {p}% - {totalWeight} kg
-              <span className='text-smaller'><br/>( {plates.join(', ')} )</span>
+              <span className='text-smaller'><br/>( {formatPlates(platesPerSide)} )</span>
             </li>
           );
         })}

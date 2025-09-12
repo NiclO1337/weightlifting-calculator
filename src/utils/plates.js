@@ -51,3 +51,19 @@ export function getPlatesPerSide(
   const solution = findCombination(0, targetUnits);
   return solution || [];
 }
+
+export function platesCounts(perSidePlates = []) {
+  return perSidePlates.reduce((acc, size) => {
+    const key = String(size);
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+}
+
+export function formatPlates(perSidePlates) {
+  const counts = platesCounts(perSidePlates);
+  return Object.entries(counts)
+    .sort((a, b) => Number(b[0]) - Number(a[0]))
+    .map(([size, qty]) => (qty > 1 ? `${size}×${qty}` : size))
+    .join(', ');
+}
