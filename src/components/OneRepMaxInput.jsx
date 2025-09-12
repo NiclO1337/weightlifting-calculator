@@ -11,7 +11,7 @@ export default function OneRepMaxInput({ value, onChange }) {
     const raw = e.target.value.replace(',', '.');
     setInputValue(raw);
     const num = parseFloat(raw);
-    if (!isNaN(num) && num >= 0 && num <= 550) {
+    if (!isNaN(num) && num >= 0 && num <= 250) {
       onChange(num);
     }
   };
