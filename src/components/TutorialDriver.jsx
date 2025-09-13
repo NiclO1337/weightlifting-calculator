@@ -37,7 +37,7 @@ const TutorialDriver = forwardRef((props, ref) => {
             element: '.barbell-selector',
             popover: {
               title: 'Barbell Selector',
-              description: 'Select the weight of your barbell here. This will be used to calculate the plates needed for your lifts.',
+              description: 'Select your barbell’s weight here. We’ll use it to suggest how to distribute weight plates on each side of the barbell for each target weight.',
               position: 'bottom',
             },
           },
@@ -64,7 +64,7 @@ const TutorialDriver = forwardRef((props, ref) => {
             popover: {
               title: 'Saved Percentages',
               description:
-                'View and manage your saved percentage calculations for your current lift. You’ll also see which weight plates to load on each side of the barbell. Click any percentage to remove it from the list.',
+                'View and manage your saved percentage calculations for your current lift. You’ll also see a suggestion of which weight plates to load on <strong>each side</strong> of the barbell. Click any percentage to remove it from the list.',
               position: 'bottom',
             },
           },
