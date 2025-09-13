@@ -4,7 +4,7 @@ import './index.css'
 import App from './App.jsx'
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); // Block the default install dialog
+  e.preventDefault();
 });
 
 createRoot(document.getElementById('root')).render(
@@ -12,3 +12,9 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/weightlifting-calculator/sw.js').catch(console.error);
+  });
+}
