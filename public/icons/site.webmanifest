@@ -1,7 +1,7 @@
 {
     "name": "Weightlifting Calculator",
     "short_name": "WeightWizard",
-    "start_url": "/",
+    "start_url": "/weightlifting-calculator/",
     "display": "standalone",
     "background_color": "#070f20",
     "theme_color": "#b7d5e6",
