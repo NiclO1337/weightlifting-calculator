@@ -5,7 +5,6 @@ const ASSETS = [
   '/src/main.jsx',
   'android-chrome-192x192.png',
   'android-chrome-512x512.png',
-  // add CSS/JS files your app needs
   '/src/index.css',
   '/src/App.css',
   '/src/App.jsx',
