@@ -39,4 +39,19 @@ describe('roundToIncrement', () => {
     expect(roundToIncrement(123456.25, 10)).toBe(123460);
   });
 
+  it('handles small increments', () => {
+    expect(roundToIncrement(1.234, 0.1)).toBeCloseTo(1.2, 5);
+    expect(roundToIncrement(1.256, 0.1)).toBeCloseTo(1.3, 5);
+  });
+
+  it('handles non-numeric input gracefully', () => {
+    expect(() => roundToIncrement(NaN)).toThrow();
+    expect(() => roundToIncrement(undefined)).toThrow();
+    expect(() => roundToIncrement(null)).toThrow();
+  });
+
+  it('handles non-positive increment gracefully', () => {
+    expect(() => roundToIncrement(10, 0)).toThrow();
+    expect(() => roundToIncrement(10, -1)).toThrow();
+  });
 });
