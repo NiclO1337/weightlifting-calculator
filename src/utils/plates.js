@@ -19,6 +19,8 @@ export function getPlatesPerSide(
   if (typeof totalWeight !== 'number' || typeof barbellWeight !== 'number')
     return [];
   if (totalWeight <= barbellWeight) return [];
+  if (!Array.isArray(plateSizes) || plateSizes.length === 0) return [];
+  if (typeof unit !== 'number' || isNaN(unit) || unit <= 0) return [];
 
   const perSideKg = (totalWeight - barbellWeight) / 2;
   // convert to integer units
