@@ -2,7 +2,7 @@ import { roundToIncrement } from '../utils/math';
 import { getPlatesPerSide, formatPlates } from '../utils/plates';
 
 export default function SavedPercentages({
-  oneRepMax = 70,
+  oneRepMax,
   percentages,
   onRemove,
   rounding,

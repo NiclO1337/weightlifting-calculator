@@ -17,13 +17,6 @@ describe('getPlatesPerSide', () => {
     expect(getPlatesPerSide(33, 15, [10, 5, 2.5])).toEqual([]);
   });
 
-  it('handles non-numeric input gracefully', () => {
-    expect(getPlatesPerSide('100')).toEqual([]);
-    expect(getPlatesPerSide(null)).toEqual([]);
-    expect(getPlatesPerSide(undefined)).toEqual([]);
-    expect(getPlatesPerSide(NaN)).toEqual([]);
-  });
-
   it('handles custom barbell weights', () => {
     expect(getPlatesPerSide(50, 20)).toEqual([15]);
     expect(getPlatesPerSide(60, 20)).toEqual([20]);
@@ -33,11 +26,6 @@ describe('getPlatesPerSide', () => {
     expect(getPlatesPerSide(50, 15, [10, 5, 2.5])).toEqual([10, 5, 2.5]);
     expect(getPlatesPerSide(55, 15, [10, 5])).toEqual([10, 10]);
   });
-
-  // it('handles floating point precision issues', () => {
-  //   expect(getPlatesPerSide(34.3, 20)).toEqual([5, 1.25, 1]);
-  //   expect(getPlatesPerSide(53.8, 20)).toEqual([15, 1.5]);
-  // });
 
   it('handles very large weights', () => {
     expect(getPlatesPerSide(250)).toEqual([20, 20, 20, 20, 20, 15, 2.5]);
@@ -56,10 +44,6 @@ describe('getPlatesPerSide', () => {
     expect(getPlatesPerSide(15)).toEqual([]);
   });
 
-  // it('handles non-standard increments', () => {
-  //   expect(getPlatesPerSide(34.3, 15, [10, 5, 2.5, 1.3], 0.1)).toEqual([10, 5, 2.5, 1.3]);
-  // });
-
   it('handles zero and negative weights gracefully', () => {
     expect(getPlatesPerSide(0)).toEqual([]);
     expect(getPlatesPerSide(-10)).toEqual([]);
@@ -74,6 +58,13 @@ describe('getPlatesPerSide', () => {
     expect(getPlatesPerSide(50, 15, [10, 5], 0)).toEqual([]);
     expect(getPlatesPerSide(50, 15, [10, 5], -1)).toEqual([]);
     expect(getPlatesPerSide(50, 15, [10, 5], 'invalid')).toEqual([]);
+  });
+
+  it('handles non-numeric input gracefully', () => {
+    expect(getPlatesPerSide('100')).toEqual([]);
+    expect(getPlatesPerSide(null)).toEqual([]);
+    expect(getPlatesPerSide(undefined)).toEqual([]);
+    expect(getPlatesPerSide(NaN)).toEqual([]);
   });
 
   it('handles non number inputs for totalWeight and barbellWeight', () => {

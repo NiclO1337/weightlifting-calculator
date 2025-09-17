@@ -16,6 +16,7 @@ export function getPlatesPerSide(
   plateSizes = DEFAULT_PLATES,
   unit = 0.25
 ) {
+  // basic input validation
   if (typeof totalWeight !== 'number' || typeof barbellWeight !== 'number')
     return [];
   if (totalWeight <= barbellWeight) return [];
