@@ -24,9 +24,6 @@ export default function SavedPercentages({
           return (
             <li key={p} onClick={() => setSelected(selected === p ? null : p)}>
               {p}% - {totalWeight} kg
-              <span className='text-smaller'>
-                <br />( {formatPlates(platesPerSide)} )
-              </span>
               {selected === p && (
                 <button
                   className='btn-remove'
@@ -38,6 +35,9 @@ export default function SavedPercentages({
                   Remove
                 </button>
               )}
+              <span className='text-smaller'>
+                <br />( {formatPlates(platesPerSide)} )
+              </span>
             </li>
           );
         })}
