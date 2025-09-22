@@ -12,9 +12,3 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/weightlifting-calculator/sw.js').catch(console.error);
-  });
-}
