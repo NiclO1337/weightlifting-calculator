@@ -7,7 +7,7 @@ export default function PercentageList({
   rounding,
   selectedPercentage,
 }) {
-  const percentages = [50, 60, 70, 80, 90, 100, 110];
+  const percentages = [40, 50, 60, 70, 80, 90, 100, 110, 120];
   return (
     <div className='percentages-list'>
       <ul>
