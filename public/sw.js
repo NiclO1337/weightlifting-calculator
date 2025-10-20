@@ -1,19 +1,27 @@
-const CACHE_NAME = 'wl-calc-v2'; // bump version number when you deploy new build
+const CACHE_NAME = 'wl-calc-v3';
 const BASE_PATH = '/weightlifting-calculator';
 
 const ASSETS = [
   `${BASE_PATH}/`,
   `${BASE_PATH}/index.html`,
-  `${BASE_PATH}/manifest.webmanifest`,
-  `${BASE_PATH}/favicon.ico`,
-  `${BASE_PATH}/android-chrome-192x192.png`,
-  `${BASE_PATH}/android-chrome-512x512.png`,
+  `${BASE_PATH}/icons/site.webmanifest`,
+  `${BASE_PATH}/icons/favicon.ico`,
+  `${BASE_PATH}/icons/android-chrome-192x192.png`,
+  `${BASE_PATH}/icons/android-chrome-512x512.png`,
 ];
 
-// Install: pre-cache basic assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      for (const asset of ASSETS) {
+        try {
+          await cache.add(asset);
+        } catch (err) {
+          console.warn('⚠️ Failed to cache', asset, err);
+        }
+      }
+    })()
   );
   self.skipWaiting();
 });
