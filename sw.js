@@ -1,11 +1,13 @@
 const CACHE_NAME = 'wl-calc-v2'; // bump version number when you deploy new build
+const BASE_PATH = '/weightlifting-calculator';
+
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/favicon.ico',
-  '/android-chrome-192x192.png',
-  '/android-chrome-512x512.png',
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/manifest.webmanifest`,
+  `${BASE_PATH}/favicon.ico`,
+  `${BASE_PATH}/android-chrome-192x192.png`,
+  `${BASE_PATH}/android-chrome-512x512.png`,
 ];
 
 // Install: pre-cache basic assets
