@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { roundToIncrement } from '../utils/math';
 import { getPlatesPerSide, formatPlates } from '../utils/plates';
+import BarbellVisualization from './BarbellVisualization';
 
 export default function SavedPercentages({
   oneRepMax,
@@ -38,6 +39,9 @@ export default function SavedPercentages({
               <span className='text-smaller'>
                 <br />( {formatPlates(platesPerSide)} )
               </span>
+              <div className='plate-viz'>
+                <BarbellVisualization plates={platesPerSide} />
+              </div>
             </li>
           );
         })}
