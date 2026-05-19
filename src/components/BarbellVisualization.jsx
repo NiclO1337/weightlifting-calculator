@@ -3,7 +3,8 @@ const PLATE_MAP = {
   20: ['#0c00b4', 20, 50],
   15: ['#ffee00', 18, 50],
   10: ['#00db12', 12, 50],
-  5: ['#1b1b1b', 7, 50],
+  // 5: ['#ffffff', 7, 32],    // color and size of real 5 kg metal plate
+  5: ['#1b1b1b', 7, 50],    // color of a 5 kg plastic plate
   2.5: ['#8d0202', 7, 30],
   2: ['#0c00b4', 7, 28],
   1.5: ['#ffee00', 7, 26],
