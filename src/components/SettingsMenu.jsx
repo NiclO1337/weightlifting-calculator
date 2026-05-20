@@ -2,6 +2,7 @@ import { useState } from 'react';
 import RoundingSelector from './RoundingSelector';
 import BarbellSelector from './BarbellSelector';
 import { Settings, X } from 'lucide-react';
+import { EXERCISE_LABELS } from '../utils/exerciseLabels';
 
 export default function SettingsMenu({
   exercises,
@@ -46,7 +47,7 @@ export default function SettingsMenu({
           <div className='settings-grid'>
             {Object.keys(exercises).map((key) => (
               <div className='input-group' key={key}>
-                <label htmlFor={`ex-${key}`}>{key}</label>
+                <label htmlFor={`ex-${key}`}>{EXERCISE_LABELS[key] || key}</label>
                 <input
                   id={`ex-${key}`}
                   type='text'

@@ -1,12 +1,4 @@
-const LABELS = {
-  snatch: 'Snatch',
-  cleanAndJerk: 'Clean & Jerk',
-  frontSquat: 'Frontsquat',
-  backSquat: 'Backsquat',
-  benchPress: 'Bench press',
-  deadlift: 'Deadlift',
-  other: 'Other',
-};
+import { EXERCISE_LABELS } from '../utils/exerciseLabels';
 
 export default function ExerciseSelector({ exercises, selectedExercise, onChange }) {
   return (
@@ -16,9 +8,9 @@ export default function ExerciseSelector({ exercises, selectedExercise, onChange
         id='exercise-select'
         value={selectedExercise}
         onChange={(e) => onChange(e.target.value)}>
-        {Object.keys(LABELS).map((key) => (
+        {Object.keys(EXERCISE_LABELS).map((key) => (
           <option key={key} value={key}>
-            {LABELS[key]} ({exercises && exercises[key] ? exercises[key] + ' kg' : '—'})
+            {EXERCISE_LABELS[key]} ({exercises && exercises[key] ? exercises[key] + ' kg' : '—'})
           </option>
         ))}
       </select>
