@@ -63,14 +63,17 @@ h1 {
   padding: 0.3em 0;
 }
 
-.question-icon {
+.question-icon,
+.btn-settings {
   vertical-align: middle;
   background-color: transparent;
   border: none;
   color: var(--color-primary-light);
-  margin-left: 0.5em;
   cursor: pointer;
+}
+.question-icon {
   position: absolute;
+  margin-left: 0.5rem;
   top: 0;
   right: 0.5rem;
 }
@@ -118,22 +121,21 @@ h1 {
 label {
   font-size: 1.2rem;
   font-weight: 500;
-  display: block;
 }
 
 input,
 select {
-  font-size: 1em;
+  text-align: center;
   font-family: inherit;
   font-weight: bold;
-  padding: 0.4em 0.8em;
   border: 1px solid #888;
   border-radius: 8px;
   background-color: var(--color-primary-light);
   color: var(--color-primary-dark);
-  text-align: center;
-  margin: 0 0.5em;
-  width: 3em;
+  font-size: 1rem;
+  width: 3rem;
+  margin: 0.2rem 0.5rem;
+  padding: 0.4rem 0.8rem;
 }
 
 select {
@@ -153,9 +155,18 @@ ul {
   margin: 0;
 }
 
+hr {
+  border: none;
+  height: 2px;
+  background-color: var(--color-primary-dark);
+  width: 80%;
+  margin: 10px auto;
+
+}
+
 .input-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: 1rem auto;
   margin-top: 0;
@@ -218,6 +229,39 @@ ul {
   display: inline-block;
   vertical-align: middle;
   margin-left: 8px;
+}
+
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.settings-panel {
+  width: 100%;
+  max-width: 700px;
+  max-height: 100%;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.settings-close {
+  color: var(--color-primary-dark);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 @media (hover: hover) and (pointer: fine) {
