@@ -5,5 +5,5 @@ export const EXERCISE_LABELS = {
   backSquat: 'Backsquat',
   benchPress: 'Bench press',
   deadlift: 'Deadlift',
-  other: 'Other',
+  other: 'Custom exercise',
 };
