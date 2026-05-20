@@ -37,47 +37,72 @@ export default function SettingsMenu({
 
   return (
     <div className='settings-menu'>
-      <p></p>
-      <button onClick={() => setOpen(!open)} className='btn-settings'>
-        {open ? <X size={40} /> : <Settings size={40} />}
+      <button
+        onClick={() => setOpen(true)}
+        className='btn-settings'
+        aria-label='Open Settings'>
+        <Settings size={40} />
       </button>
+
       {open && (
-        <div className='settings-panel'>
-          <h3>1 rep max values:</h3>
-          <div className='settings-grid'>
-            {Object.keys(exercises).map((key) => (
-              <div className='input-group' key={key}>
-                <label htmlFor={`ex-${key}`}>{EXERCISE_LABELS[key] || key}</label>
-                <input
-                  id={`ex-${key}`}
-                  type='text'
-                  inputMode='decimal'
-                  value={exercises[key]}
-                  onChange={(e) => updateExercise(key, e.target.value)}
-                />
-              </div>
-            ))}
-          </div>
+        <div
+          className='settings-overlay'
+          role='dialog'
+          aria-modal='true'
+          aria-labelledby='settings-heading'
+          onClick={() => setOpen(false)}>
+          <div className='settings-panel' onClick={(e) => e.stopPropagation()}>
+            <button
+              className='settings-close'
+              onClick={() => setOpen(false)}
+              aria-label='Close Settings'>
+              <X size={30} />
+            </button>
 
-          <h3>Other settings</h3>
-          <RoundingSelector rounding={rounding} onChange={setRounding} />
-          <BarbellSelector
-            barbellWeight={barbellWeight}
-            onChange={setBarbellWeight}
-          />
-
-          <div className='input-group'>
-            <label htmlFor='available-plates'>
-              Available plates (comma separated)
-            </label>
-            <input
-              id='available-plates'
-              type='text'
-              placeholder='20,15,10,5,2.5'
-              defaultValue={availablePlates ? availablePlates.join(',') : ''}
-              onBlur={(e) => applyPlatesFromString(e.target.value)}
+            <h2 id='settings-heading' class="special-font">Settings</h2>
+            <hr />
+            <h3 class="special-font">1 Rep Max values:</h3>
+            <div className='settings-grid'>
+              {Object.keys(exercises).map((key) => (
+                <div className='input-group' key={key}>
+                  <label
+                    htmlFor={`ex-${key}`}
+                    aria-label={`Set ${EXERCISE_LABELS[key] || key} 1 rep max`}>
+                    {EXERCISE_LABELS[key] || key}
+                  </label>
+                  <input
+                    id={`ex-${key}`}
+                    type='text'
+                    inputMode='decimal'
+                    value={exercises[key]}
+                    onChange={(e) => updateExercise(key, e.target.value)}
+                  />
+                </div>
+              ))}
+            </div>
+            <hr />
+            <h3 class="special-font">Other settings</h3>
+            <RoundingSelector rounding={rounding} onChange={setRounding} />
+            <BarbellSelector
+              barbellWeight={barbellWeight}
+              onChange={setBarbellWeight}
             />
-            <small>Leave empty to use default plate set</small>
+
+            <div className='input-group'>
+              <label
+                htmlFor='available-plates'
+                aria-label='Available plates (comma separated)'>
+                Available plates (comma separated)
+              </label>
+              <input
+                id='available-plates'
+                type='text'
+                placeholder='20,15,10,5,2.5'
+                defaultValue={availablePlates ? availablePlates.join(',') : ''}
+                onBlur={(e) => applyPlatesFromString(e.target.value)}
+              />
+              <small>Leave empty to use default plate set</small>
+            </div>
           </div>
         </div>
       )}
