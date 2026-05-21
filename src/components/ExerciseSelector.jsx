@@ -2,7 +2,7 @@ import { EXERCISE_LABELS } from '../utils/exerciseLabels';
 
 export default function ExerciseSelector({ exercises, selectedExercise, onChange }) {
   return (
-    <div className='input-group'>
+    <div>
       <label htmlFor='exercise-select'></label>
       <select
         id='exercise-select'

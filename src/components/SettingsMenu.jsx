@@ -3,6 +3,7 @@ import RoundingSelector from './RoundingSelector';
 import BarbellSelector from './BarbellSelector';
 import { Settings, X } from 'lucide-react';
 import { EXERCISE_LABELS } from '../utils/exerciseLabels';
+import { DEFAULT_PLATES } from '../utils/plates';
 
 export default function SettingsMenu({
   exercises,
@@ -15,19 +16,18 @@ export default function SettingsMenu({
   setAvailablePlates,
 }) {
   const PLATE_OPTIONS = [25, 20, 15, 10, 5, 2.5, 2, 1.5, 1.25, 1, 0.5];
+  const effectivePlates = availablePlates ?? DEFAULT_PLATES;
 
   const [open, setOpen] = useState(false);
 
   function handlePlateToggle(plate) {
-    if (!availablePlates) {
-      setAvailablePlates([plate]);
-      return;
-    }
+    const currentPlates = availablePlates ?? DEFAULT_PLATES;
 
-    if (availablePlates.includes(plate)) {
-      setAvailablePlates(availablePlates.filter((p) => p !== plate));
+    if (currentPlates.includes(plate)) {
+      const updated = currentPlates.filter((p) => p !== plate);
+      setAvailablePlates(updated);
     } else {
-      const updated = [...availablePlates, plate].sort((a, b) => b - a);
+      const updated = [...currentPlates, plate].sort((a, b) => b - a);
       setAvailablePlates(updated);
     }
   }
@@ -90,7 +90,7 @@ export default function SettingsMenu({
             <h3 class='special-font'>1 Rep Max values:</h3>
             <div className='settings-grid'>
               {Object.keys(exercises).map((key) => (
-                <div className='input-group' key={key}>
+                <div key={key}>
                   <label
                     htmlFor={`ex-${key}`}
                     aria-label={`Set ${EXERCISE_LABELS[key] || key} 1 rep max`}>
@@ -116,7 +116,7 @@ export default function SettingsMenu({
               onChange={setBarbellWeight}
             />
 
-            <div className='input-group'>
+            <div>
               <fieldset>
                 <legend>Available plates</legend>
                 <div className='plates-checkboxes'>
@@ -124,7 +124,7 @@ export default function SettingsMenu({
                     <label key={plate}>
                       <input
                         type='checkbox'
-                        checked={availablePlates?.includes(plate) || false}
+                        checked={effectivePlates.includes(plate)}
                         onChange={() => handlePlateToggle(plate)}
                       />
                       {plate} kg

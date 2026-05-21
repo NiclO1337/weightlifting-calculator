@@ -146,6 +146,10 @@ select {
   width: auto;
 }
 
+#exercise-select {
+  background-color: var(--color-primary-light);
+}
+
 li {
   list-style-type: none;
   cursor: pointer;
