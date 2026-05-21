@@ -208,13 +208,27 @@ hr {
   width: 40%;
 }
 
-#driver-popover-content {
+#driver-popover-content,
+#driver-popover-content .driver-popover-progress-text,
+#driver-popover-content .driver-popover-close-btn  {
   background-color: var(--color-primary-dark);
   color: var(--color-primary-light);
 }
 
-#driver-popover-content .driver-popover-progress-text {
-  color: var(--color-primary-light);
+#driver-popover-content .driver-popover-prev-btn,
+#driver-popover-content .driver-popover-next-btn {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  text-shadow: none;
+  border: none;
+  padding: 0.3em 0.6em;
+}
+
+#driver-popover-content .driver-popover-arrow-side-bottom {
+    border-bottom-color: var(--color-primary-light);
+}
+#driver-popover-content .driver-popover-arrow-side-top {
+  border-top-color: var(--color-primary-light);
 }
 
 .btn {
