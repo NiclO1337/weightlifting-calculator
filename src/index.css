@@ -42,6 +42,10 @@ h1 {
   margin: 1rem 0 0.5rem;
 }
 
+.settings-panel h3 {
+  margin: 0;
+}
+
 .header-row {
   max-width: 430px;
   margin: 0 auto;
@@ -63,14 +67,17 @@ h1 {
   padding: 0.3em 0;
 }
 
-.question-icon {
+.btn-tutorial,
+.btn-settings {
   vertical-align: middle;
   background-color: transparent;
   border: none;
   color: var(--color-primary-light);
-  margin-left: 0.5em;
   cursor: pointer;
+}
+.btn-tutorial {
   position: absolute;
+  margin-left: 0.5rem;
   top: 0;
   right: 0.5rem;
 }
@@ -118,22 +125,21 @@ h1 {
 label {
   font-size: 1.2rem;
   font-weight: 500;
-  display: block;
 }
 
 input,
 select {
-  font-size: 1em;
+  text-align: center;
   font-family: inherit;
   font-weight: bold;
-  padding: 0.4em 0.8em;
   border: 1px solid #888;
   border-radius: 8px;
   background-color: var(--color-primary-light);
   color: var(--color-primary-dark);
-  text-align: center;
-  margin: 0 0.5em;
-  width: 3em;
+  font-size: 1rem;
+  width: 3rem;
+  margin: 0.2rem 0.5rem;
+  padding: 0.4rem 0.8rem;
 }
 
 select {
@@ -153,9 +159,18 @@ ul {
   margin: 0;
 }
 
+hr {
+  border: none;
+  height: 2px;
+  background-color: var(--color-primary-dark);
+  width: 80%;
+  margin: 10px auto;
+
+}
+
 .input-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: 1rem auto;
   margin-top: 0;
@@ -193,31 +208,118 @@ ul {
   width: 40%;
 }
 
-#driver-popover-content {
+#driver-popover-content,
+#driver-popover-content .driver-popover-progress-text,
+#driver-popover-content .driver-popover-close-btn  {
   background-color: var(--color-primary-dark);
   color: var(--color-primary-light);
 }
 
-#driver-popover-content .driver-popover-progress-text {
+#driver-popover-content .driver-popover-prev-btn,
+#driver-popover-content .driver-popover-next-btn {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  text-shadow: none;
+  border: none;
+  padding: 0.3em 0.6em;
+}
+
+#driver-popover-content .driver-popover-arrow-side-bottom {
+    border-bottom-color: var(--color-primary-light);
+}
+#driver-popover-content .driver-popover-arrow-side-top {
+  border-top-color: var(--color-primary-light);
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  border: none;
+  margin-left: 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.btn-reset {
+  background-color: var(--color-primary-dark);
   color: var(--color-primary-light);
 }
 
 .btn-remove {
   background-color: red;
-  border: none;
   color: white;
-  font-size: 0.8rem;
-  cursor: pointer;
-  display: inline-block;
-  margin-left: 1rem;
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.3rem;
 }
 
 .plate-viz {
   display: inline-block;
   vertical-align: middle;
   margin-left: 8px;
+}
+
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.settings-panel {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 700px;
+  max-height: calc(100vh - 2rem);
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.settings-close {
+  color: var(--color-primary-dark);
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.plates-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.4rem;
+  margin: 0.2rem auto;
+}
+
+.plates-checkboxes label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.plates-checkboxes input[type='checkbox'] {
+  width: auto;
+  margin: 0 0 0 1rem;
+  cursor: pointer;
+}
+
+fieldset {
+  border: 1px solid var(--color-primary-dark);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+legend {
+  padding: 0 0.5rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -249,7 +351,7 @@ ul {
   .input-container {
     width: 80%;
   }
-  .question-icon {
+  .btn-tutorial {
     right: 7%;
   }
 }
@@ -264,7 +366,8 @@ ul {
   h1 {
     font-size: 2.5em;
   }
-  .question-icon {
+  .btn-tutorial {
     right: 0.5rem;
+    top: 0.4rem;
   }
 }

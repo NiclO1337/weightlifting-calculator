@@ -1,4 +1,3 @@
-
 import { useRef } from 'react';
 import TutorialDriver from './TutorialDriver';
 import { MessageCircleQuestionMark } from 'lucide-react';
@@ -11,12 +10,13 @@ export default function Header() {
       <h1 className='special-font'>
         Weightlifting <br /> Calculator
       </h1>
-      <button className='question-icon' onClick={() => tutorialRef.current?.start()}>
+      <button
+        className='btn-tutorial'
+        aria-label='Start Tutorial'
+        onClick={() => tutorialRef.current?.start()}>
         <MessageCircleQuestionMark size={30} />
         <span className='visually-hidden'>Start Tutorial</span>
-        <TutorialDriver
-          ref={tutorialRef}
-        />
+        <TutorialDriver ref={tutorialRef} />
       </button>
     </div>
   );

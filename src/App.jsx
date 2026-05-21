@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 
 import Header from './components/Header';
-import OneRepMaxInput from './components/OneRepMaxInput';
+import ExerciseSelector from './components/ExerciseSelector';
+import SettingsMenu from './components/SettingsMenu';
 import RoundingSelector from './components/RoundingSelector';
 import BarbellSelector from './components/BarbellSelector';
 import PercentageList from './components/PercentageList';
@@ -10,18 +11,47 @@ import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
 
 function App() {
-  const [oneRepMax, setOneRepMax] = useState(() => {
-    const stored = localStorage.getItem('oneRepMax');
-    return stored ? Number(stored) : 70;
+  const sampleDefaults = {
+    snatch: 50,
+    cleanAndJerk: 75,
+    frontSquat: 82.5,
+    backSquat: 100,
+    benchPress: 80,
+    deadlift: 130,
+    other: 69,
+  };
+
+  const [exercises, setExercises] = useState(() => {
+    const legacy = localStorage.getItem('oneRepMax');
+    const stored = localStorage.getItem('exercises1RM');
+    if (stored) return JSON.parse(stored);
+    if (legacy) {
+      const val = Number(legacy) || sampleDefaults.snatch;
+      return { ...sampleDefaults, snatch: val };
+    }
+    return sampleDefaults;
   });
+
+  const [selectedExercise, setSelectedExercise] = useState(() => {
+    const stored = localStorage.getItem('selectedExercise');
+    return stored ? stored : 'snatch';
+  });
+
   const [rounding, setRounding] = useState(() => {
     const stored = localStorage.getItem('rounding');
     return stored ? Number(stored) : 0.5;
   });
+
   const [barbellWeight, setBarbellWeight] = useState(() => {
     const stored = localStorage.getItem('barbellWeight');
     return stored ? Number(stored) : 15;
   });
+
+  const [availablePlates, setAvailablePlates] = useState(() => {
+    const stored = localStorage.getItem('availablePlates');
+    return stored ? JSON.parse(stored) : null;
+  });
+
   const [savedPercentages, setSavedPercentages] = useState(() => {
     const stored = localStorage.getItem('savedPercentages');
     return stored ? JSON.parse(stored) : [73, 77, 81];
@@ -31,8 +61,20 @@ function App() {
   const [showTutorial, setShowTutorial] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('oneRepMax', oneRepMax);
-  }, [oneRepMax]);
+    localStorage.setItem('exercises1RM', JSON.stringify(exercises));
+  }, [exercises]);
+
+  useEffect(() => {
+    localStorage.setItem('selectedExercise', selectedExercise);
+  }, [selectedExercise]);
+
+  useEffect(() => {
+    if (availablePlates === null) {
+      localStorage.removeItem('availablePlates');
+    } else {
+      localStorage.setItem('availablePlates', JSON.stringify(availablePlates));
+    }
+  }, [availablePlates]);
 
   useEffect(() => {
     localStorage.setItem('rounding', rounding);
@@ -56,16 +98,27 @@ function App() {
     setSavedPercentages(savedPercentages.filter((p) => p !== percent));
   };
 
+  const oneRepMax = exercises[selectedExercise];
+
   return (
     <>
       <Header showTutorial={showTutorial} setShowTutorial={setShowTutorial} />
 
       <div className='input-container'>
-        <OneRepMaxInput value={oneRepMax} onChange={setOneRepMax} />
-        <RoundingSelector rounding={rounding} onChange={setRounding} />
-        <BarbellSelector
+        <ExerciseSelector
+          exercises={exercises}
+          selectedExercise={selectedExercise}
+          onChange={setSelectedExercise}
+        />
+        <SettingsMenu
+          exercises={exercises}
+          onChangeExercises={setExercises}
+          rounding={rounding}
+          setRounding={setRounding}
           barbellWeight={barbellWeight}
-          onChange={setBarbellWeight}
+          setBarbellWeight={setBarbellWeight}
+          availablePlates={availablePlates}
+          setAvailablePlates={setAvailablePlates}
         />
       </div>
 
@@ -89,6 +142,7 @@ function App() {
         onRemove={handleRemovePercentage}
         rounding={rounding}
         barbellWeight={barbellWeight}
+        availablePlates={availablePlates}
       />
     </>
   );

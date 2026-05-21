@@ -9,6 +9,7 @@ export default function SavedPercentages({
   onRemove,
   rounding,
   barbellWeight,
+  availablePlates,
 }) {
   const [selected, setSelected] = useState(false);
 
@@ -20,14 +21,18 @@ export default function SavedPercentages({
       <ul>
         {percentages.map((p) => {
           const totalWeight = roundToIncrement((oneRepMax * p) / 100, rounding);
-          const platesPerSide = getPlatesPerSide(totalWeight, barbellWeight);
+          const platesPerSide = getPlatesPerSide(
+            totalWeight,
+            barbellWeight,
+            availablePlates || undefined
+          );
 
           return (
             <li key={p} onClick={() => setSelected(selected === p ? null : p)}>
               {p}% - {totalWeight} kg
               {selected === p && (
                 <button
-                  className='btn-remove'
+                  className='btn btn-remove'
                   onClick={(e) => {
                     e.stopPropagation();
                     onRemove(p);
