@@ -261,11 +261,11 @@ hr {
 .settings-close {
   color: var(--color-primary-dark);
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
   background: transparent;
   border: none;
   cursor: pointer;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 .plates-checkboxes {
@@ -345,5 +345,6 @@ legend {
   }
   .question-icon {
     right: 0.5rem;
+    top: 0.4rem;
   }
 }
