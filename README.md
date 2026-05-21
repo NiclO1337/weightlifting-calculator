@@ -33,11 +33,13 @@ Instead of doing the math in your head or looking up tables, this app shows you 
 
 - Detailed Ranges – click a percentage to expand and view all weights in that range (e.g., 70–79%).
 
-- Saved Percentages – save your frequently used percentages (e.g., 68%, 76%, 82%) for quick reference.
+- Saved Percentages – save your percentages for current workout (e.g., 68%, 76%, 82%) for quick reference.
 
 - Custom Rounding – round to your preferred increment (0.5kg, 1kg, 2.5kg, etc.).
 
-- Barbell Plate Calculator – see which plates to load on each side of the bar, based on available gym plates.
+- Choose weight plates based on preference and availability.
+
+- Barbell Plate Calculator – see which plates to load on each side of the bar, based on available weight plates.
 
 - Local Storage Support – your settings and saved percentages persist even if you close the browser.
 
