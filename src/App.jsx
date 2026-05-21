@@ -12,13 +12,13 @@ import SavedPercentages from './components/SavedPercentages';
 
 function App() {
   const sampleDefaults = {
-    snatch: 40,
-    cleanAndJerk: 60,
-    frontSquat: 80,
+    snatch: 50,
+    cleanAndJerk: 75,
+    frontSquat: 82.5,
     backSquat: 100,
-    benchPress: 70,
-    deadlift: 120,
-    other: 80,
+    benchPress: 80,
+    deadlift: 130,
+    other: 69,
   };
 
   const [exercises, setExercises] = useState(() => {

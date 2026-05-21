@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RoundingSelector from './RoundingSelector';
 import BarbellSelector from './BarbellSelector';
 import { Settings, X } from 'lucide-react';
@@ -32,9 +32,30 @@ export default function SettingsMenu({
     }
   }
 
-  function updateExercise(key, value) {
-    const num = Number(value);
-    if (isNaN(num)) return;
+  const [exerciseInputs, setExerciseInputs] = useState(() =>
+    Object.fromEntries(
+      Object.entries(exercises).map(([key, value]) => [key, String(value)]),
+    ),
+  );
+
+  useEffect(() => {
+    setExerciseInputs(
+      Object.fromEntries(
+        Object.entries(exercises).map(([key, value]) => [key, String(value)]),
+      ),
+    );
+  }, [exercises]);
+
+  function handleExerciseInputChange(key, rawValue) {
+    const normalized = String(rawValue).replace(',', '.');
+    setExerciseInputs((prev) => ({ ...prev, [key]: rawValue }));
+
+    if (!normalized || normalized === '.' || normalized === ',') return;
+    if (/[.,]$/.test(rawValue)) return;
+
+    const num = Number(normalized);
+    if (!Number.isFinite(num) || num < 0 || num > 250) return;
+
     onChangeExercises({ ...exercises, [key]: num });
   }
 
@@ -79,8 +100,10 @@ export default function SettingsMenu({
                     id={`ex-${key}`}
                     type='text'
                     inputMode='decimal'
-                    value={exercises[key]}
-                    onChange={(e) => updateExercise(key, e.target.value)}
+                    value={exerciseInputs[key] ?? ''}
+                    onChange={(e) =>
+                      handleExerciseInputChange(key, e.target.value)
+                    }
                   />
                 </div>
               ))}
@@ -108,7 +131,10 @@ export default function SettingsMenu({
                     </label>
                   ))}
                 </div>
-                <button class="btn btn-reset" type='button' onClick={() => setAvailablePlates(null)}>
+                <button
+                  class='btn btn-reset'
+                  type='button'
+                  onClick={() => setAvailablePlates(null)}>
                   Reset to default
                 </button>
               </fieldset>
