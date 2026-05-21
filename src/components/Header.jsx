@@ -11,7 +11,7 @@ export default function Header() {
         Weightlifting <br /> Calculator
       </h1>
       <button
-        className='question-icon'
+        className='btn-tutorial'
         aria-label='Start Tutorial'
         onClick={() => tutorialRef.current?.start()}>
         <MessageCircleQuestionMark size={30} />

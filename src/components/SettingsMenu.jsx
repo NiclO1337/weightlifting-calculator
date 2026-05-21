@@ -108,7 +108,7 @@ export default function SettingsMenu({
                     </label>
                   ))}
                 </div>
-                <button type='button' onClick={() => setAvailablePlates(null)}>
+                <button class="btn btn-reset" type='button' onClick={() => setAvailablePlates(null)}>
                   Reset to default
                 </button>
               </fieldset>

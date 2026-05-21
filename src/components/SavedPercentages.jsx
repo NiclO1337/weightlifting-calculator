@@ -32,7 +32,7 @@ export default function SavedPercentages({
               {p}% - {totalWeight} kg
               {selected === p && (
                 <button
-                  className='btn-remove'
+                  className='btn btn-remove'
                   onClick={(e) => {
                     e.stopPropagation();
                     onRemove(p);
