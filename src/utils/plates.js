@@ -2,7 +2,7 @@
 // Returns an array of plate sizes (kg) used on one side, sorted descending.
 // If no exact combination exists, returns [].
 
-const DEFAULT_PLATES = [20, 15, 10, 5, 2.5, 2, 1.5, 1.25, 1, 0.5];
+export const DEFAULT_PLATES = [20, 15, 10, 5, 2.5, 2, 1.5, 1.25, 1, 0.5];
 
 /**
  * getPlatesPerSide(totalWeight, barbellWeight = 20, plateSizes = DEFAULT_PLATES, unit = 0.25)
