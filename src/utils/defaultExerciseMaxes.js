@@ -1,4 +1,4 @@
-export const defaultExerciseMaxes = {
+export const DEFAULT_EXERCISE_MAXES = {
     snatch: 50,
     cleanAndJerk: 75,
     frontSquat: 82.5,
