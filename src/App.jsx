@@ -10,26 +10,18 @@ import PercentageList from './components/PercentageList';
 import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
 
-function App() {
-  const sampleDefaults = {
-    snatch: 50,
-    cleanAndJerk: 75,
-    frontSquat: 82.5,
-    backSquat: 100,
-    benchPress: 80,
-    deadlift: 130,
-    other: 69,
-  };
+import { defaultExerciseMaxes } from './utils/defaultExerciseMaxes';
 
+function App() {
   const [exercises, setExercises] = useState(() => {
     const legacy = localStorage.getItem('oneRepMax');
     const stored = localStorage.getItem('exercises1RM');
     if (stored) return JSON.parse(stored);
     if (legacy) {
-      const val = Number(legacy) || sampleDefaults.snatch;
-      return { ...sampleDefaults, snatch: val };
+      const val = Number(legacy) || defaultExerciseMaxes.snatch;
+      return { ...defaultExerciseMaxes, snatch: val };
     }
-    return sampleDefaults;
+    return defaultExerciseMaxes;
   });
 
   const [selectedExercise, setSelectedExercise] = useState(() => {
