@@ -10,7 +10,7 @@ import PercentageList from './components/PercentageList';
 import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
 
-import { defaultExerciseMaxes } from './utils/defaultExerciseMaxes';
+import { DEFAULT_EXERCISE_MAXES } from './utils/DEFAULT_EXERCISE_MAXES';
 
 function App() {
   const [exercises, setExercises] = useState(() => {
@@ -18,10 +18,10 @@ function App() {
     const stored = localStorage.getItem('exercises1RM');
     if (stored) return JSON.parse(stored);
     if (legacy) {
-      const val = Number(legacy) || defaultExerciseMaxes.snatch;
-      return { ...defaultExerciseMaxes, snatch: val };
+      const val = Number(legacy) || DEFAULT_EXERCISE_MAXES.snatch;
+      return { ...DEFAULT_EXERCISE_MAXES, snatch: val };
     }
-    return defaultExerciseMaxes;
+    return DEFAULT_EXERCISE_MAXES;
   });
 
   const [selectedExercise, setSelectedExercise] = useState(() => {
