@@ -168,7 +168,7 @@ hr {
   margin: 10px auto;
 }
 
-.input-container {
+.settings-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -348,7 +348,7 @@ legend {
     padding: 0.6em 1em;
     width: 80%;
   }
-  .input-container {
+  .settings-container {
     width: 80%;
   }
   .btn-tutorial {
