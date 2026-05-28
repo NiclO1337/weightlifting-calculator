@@ -104,7 +104,7 @@ function App() {
     <>
       <Header showTutorial={showTutorial} setShowTutorial={setShowTutorial} />
 
-      <div className='input-container'>
+      <div className='settings-container'>
         <ExerciseSelector
           exercises={exercises}
           selectedExercise={selectedExercise}
