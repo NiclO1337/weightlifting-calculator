@@ -8,9 +8,9 @@ export default function ExerciseSelector({ exercises, selectedExercise, onChange
         id='exercise-select'
         value={selectedExercise}
         onChange={(e) => onChange(e.target.value)}>
-        {Object.keys(EXERCISE_LABELS).map((key) => (
+        {Object.entries(EXERCISE_LABELS).map(([key, label]) => (
           <option key={key} value={key}>
-            {EXERCISE_LABELS[key]} ({exercises && exercises[key] ? exercises[key] + ' kg' : '—'})
+            {label} ({exercises && exercises[key] ? exercises[key] + ' kg' : '—'})
           </option>
         ))}
       </select>
