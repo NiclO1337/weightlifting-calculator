@@ -2,9 +2,15 @@ export function parseExerciseInput(rawValue) {
   // Convert comma decimals to dot decimals
   const normalized = String(rawValue).replace(',', '.');
 
-  // Ignore temporary unfinished typing states for empty, just a dot, or just a comma.
-  if (!normalized || normalized === '.' || normalized === ',') {
+  // Ignore temporary unfinished typing states for empty|
+  if (!normalized) {
     return { valid: false, reason: 'incomplete' };
+  }
+
+  const decimalPart = normalized.split('.')[1];
+
+  if (decimalPart && decimalPart.length > 2) {
+    return { valid: false, reason: 'too_many_decimals' };
   }
 
   // Ignore incomplete decimal input while the user is still typing.
