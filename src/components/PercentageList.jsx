@@ -1,5 +1,6 @@
 import { roundToIncrement } from '../utils/math.js';
 import { MoveRight } from 'lucide-react';
+import { PERCENTAGE_RANGE } from '../constants/percentages.js';
 
 export default function PercentageList({
   onSelect,
@@ -7,11 +8,10 @@ export default function PercentageList({
   rounding,
   selectedPercentage,
 }) {
-  const percentages = [40, 50, 60, 70, 80, 90, 100, 110, 120];
   return (
     <div className='percentages-list'>
       <ul>
-        {percentages.map((p) => (
+        {PERCENTAGE_RANGE.map((p) => (
           <li key={p}>
             <button onClick={() => onSelect(p)}>
               {p}% - {roundToIncrement((oneRepMax * p) / 100, rounding)} kg
