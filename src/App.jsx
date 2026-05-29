@@ -104,7 +104,7 @@ function App() {
         />
         <SettingsMenu
           exercises={exercises}
-          onChangeExercises={setExercises}
+          onChangeExerciseValue={setExercises}
           rounding={rounding}
           setRounding={setRounding}
           barbellWeight={barbellWeight}
