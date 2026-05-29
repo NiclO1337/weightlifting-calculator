@@ -8,7 +8,7 @@ import { parseExerciseInput } from '../utils/inputParsing';
 
 export default function SettingsMenu({
   exercises,
-  onChangeExercises,
+  onChangeExerciseValue,
   rounding,
   setRounding,
   barbellWeight,
@@ -54,7 +54,7 @@ export default function SettingsMenu({
 
     if (!parsed.valid) return;
 
-    onChangeExercises({ ...exercises, [key]: parsed.value });
+    onChangeExerciseValue({ ...exercises, [key]: parsed.value });
   }
 
   return (
