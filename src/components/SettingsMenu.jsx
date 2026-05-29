@@ -48,6 +48,11 @@ export default function SettingsMenu({
   }, [exercises]);
 
   function handleExerciseInputChange(key, rawValue) {
+    // Limit to max 1 decimal places
+    if (/^\d+([.,]\d{0,1})?$/.test(rawValue) === false && rawValue !== '') {
+      return;
+    }
+
     setExerciseInputs((prev) => ({ ...prev, [key]: rawValue }));
 
     const parsed = parseExerciseInput(rawValue);

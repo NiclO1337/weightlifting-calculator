@@ -9,7 +9,7 @@ export function parseExerciseInput(rawValue) {
 
   const decimalPart = normalized.split('.')[1];
 
-  if (decimalPart && decimalPart.length > 2) {
+  if (decimalPart && decimalPart.length > 1) {
     return { valid: false, reason: 'too_many_decimals' };
   }
 
