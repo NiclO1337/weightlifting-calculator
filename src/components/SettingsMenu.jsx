@@ -20,42 +20,61 @@ export default function SettingsMenu({
   const [open, setOpen] = useState(false);
 
   function handlePlateToggle(plate) {
-    const currentPlates = availablePlates ?? DEFAULT_PLATES;
+    const current = availablePlates ?? DEFAULT_PLATES;
 
-    if (currentPlates.includes(plate)) {
-      const updated = currentPlates.filter((p) => p !== plate);
-      setAvailablePlates(updated);
-    } else {
-      const updated = [...currentPlates, plate].sort((a, b) => b - a);
-      setAvailablePlates(updated);
-    }
+    const updated = current.includes(plate)
+      ? current.filter((p) => p !== plate)
+      : [...current, plate].sort((a, b) => b - a);
+
+    setAvailablePlates(updated);
+  }
+
+  function stringifyExerciseValues(exercises) {
+    return Object.fromEntries(
+      Object.entries(exercises).map(([key, value]) => [key, String(value)]),
+    );
   }
 
   const [exerciseInputs, setExerciseInputs] = useState(() =>
-    Object.fromEntries(
-      Object.entries(exercises).map(([key, value]) => [key, String(value)]),
-    ),
+    // Separate text input state from numeric exercise state so users can
+    // type incomplete decimal values like "12." without breaking validation.
+    stringifyExerciseValues(exercises),
   );
 
   useEffect(() => {
-    setExerciseInputs(
-      Object.fromEntries(
-        Object.entries(exercises).map(([key, value]) => [key, String(value)]),
-      ),
-    );
+    // Keep local input strings synchronized with externally updated exercise values.
+    setExerciseInputs(stringifyExerciseValues(exercises));
   }, [exercises]);
 
-  function handleExerciseInputChange(key, rawValue) {
+  function parseExerciseInput(rawValue) {
     const normalized = String(rawValue).replace(',', '.');
-    setExerciseInputs((prev) => ({ ...prev, [key]: rawValue }));
 
-    if (!normalized || normalized === '.' || normalized === ',') return;
-    if (/[.,]$/.test(rawValue)) return;
+    // Ignore incomplete decimal input while the user is still typing.
+    if (!normalized || normalized === '.' || normalized === ',') {
+      return null;
+    }
+
+    if (/[.,]$/.test(rawValue)) {
+      return null;
+    }
 
     const num = Number(normalized);
-    if (!Number.isFinite(num) || num < 0 || num > 250) return;
 
-    onChangeExercises({ ...exercises, [key]: num });
+    if (!Number.isFinite(num) || num < 0 || num > 250) {
+      return null;
+    }
+
+    return num;
+  }
+
+  function handleExerciseInputChange(key, rawValue) {
+    setExerciseInputs((prev) => ({ ...prev, [key]: rawValue }));
+
+    const parsed = parseExerciseInput(rawValue);
+
+    if (parsed === null) return;
+
+    onChangeExercises({ ...exercises, [key]: parsed });
   }
 
   return (
@@ -82,11 +101,11 @@ export default function SettingsMenu({
               <X size={30} />
             </button>
 
-            <h2 id='settings-heading' class='special-font'>
+            <h2 id='settings-heading' className='special-font'>
               Settings
             </h2>
             <hr />
-            <h3 class='special-font'>1 Rep Max values:</h3>
+            <h3 className='special-font'>1 Rep Max values:</h3>
             <div className='settings-grid'>
               {Object.keys(exercises).map((key) => (
                 <div key={key}>
@@ -108,7 +127,7 @@ export default function SettingsMenu({
               ))}
             </div>
             <hr />
-            <h3 class='special-font'>Other settings</h3>
+            <h3 className='special-font'>Other settings</h3>
             <RoundingSelector rounding={rounding} onChange={setRounding} />
             <BarbellSelector
               barbellWeight={barbellWeight}
@@ -131,7 +150,7 @@ export default function SettingsMenu({
                   ))}
                 </div>
                 <button
-                  class='btn btn-reset'
+                  className='btn btn-reset'
                   type='button'
                   onClick={() => setAvailablePlates(null)}>
                   Reset to default
