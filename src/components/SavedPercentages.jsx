@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { roundToIncrement } from '../utils/math';
-import { getPlatesPerSide, formatPlates } from '../utils/plates';
+import { getPlatesPerSide, formatPlates } from '../utils/calculatePlates';
 import BarbellVisualization from './BarbellVisualization';
 
 export default function SavedPercentages({

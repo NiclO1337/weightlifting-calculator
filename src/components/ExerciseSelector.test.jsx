@@ -1,8 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import ExerciseSelector from './ExerciseSelector';
-import { DEFAULT_EXERCISE_MAXES } from '../utils/defaultExerciseMaxes';
-import { EXERCISE_LABELS } from '../utils/exerciseLabels';
+import { EXERCISE_LABELS, DEFAULT_EXERCISE_MAXES } from '../constants/exercises';
 
 describe('ExerciseSelector', () => {
   it('renders label and all options', () => {

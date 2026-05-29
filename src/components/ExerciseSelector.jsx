@@ -1,4 +1,4 @@
-import { EXERCISE_LABELS } from '../utils/exerciseLabels';
+import { EXERCISE_LABELS } from '../constants/exercises';
 
 export default function ExerciseSelector({
   exercises,
