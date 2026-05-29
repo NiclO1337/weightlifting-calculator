@@ -4,6 +4,7 @@ import BarbellSelector from './BarbellSelector';
 import { Settings, X } from 'lucide-react';
 import { EXERCISE_LABELS } from '../constants/exercises';
 import { DEFAULT_PLATES, PLATE_OPTIONS } from '../constants/plates';
+import { parseExerciseInput } from '../utils/inputParsing';
 
 export default function SettingsMenu({
   exercises,
@@ -46,35 +47,14 @@ export default function SettingsMenu({
     setExerciseInputs(stringifyExerciseValues(exercises));
   }, [exercises]);
 
-  function parseExerciseInput(rawValue) {
-    const normalized = String(rawValue).replace(',', '.');
-
-    // Ignore incomplete decimal input while the user is still typing.
-    if (!normalized || normalized === '.' || normalized === ',') {
-      return null;
-    }
-
-    if (/[.,]$/.test(rawValue)) {
-      return null;
-    }
-
-    const num = Number(normalized);
-
-    if (!Number.isFinite(num) || num < 0 || num > 250) {
-      return null;
-    }
-
-    return num;
-  }
-
   function handleExerciseInputChange(key, rawValue) {
     setExerciseInputs((prev) => ({ ...prev, [key]: rawValue }));
 
     const parsed = parseExerciseInput(rawValue);
 
-    if (parsed === null) return;
+    if (!parsed.valid) return;
 
-    onChangeExercises({ ...exercises, [key]: parsed });
+    onChangeExercises({ ...exercises, [key]: parsed.value });
   }
 
   return (
