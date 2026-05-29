@@ -10,7 +10,7 @@ import PercentageList from './components/PercentageList';
 import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
 
-import { DEFAULT_EXERCISE_MAXES } from './utils/defaultExerciseMaxes';
+import { DEFAULT_EXERCISE_MAXES } from './constants/exercises';
 
 function App() {
   const [exercises, setExercises] = useState(() => {

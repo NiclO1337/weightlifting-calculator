@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import RoundingSelector from './RoundingSelector';
 import BarbellSelector from './BarbellSelector';
 import { Settings, X } from 'lucide-react';
-import { EXERCISE_LABELS } from '../utils/exerciseLabels';
-import { DEFAULT_PLATES } from '../utils/plates';
+import { EXERCISE_LABELS } from '../constants/exercises';
+import { DEFAULT_PLATES, PLATE_OPTIONS } from '../constants/plates';
 
 export default function SettingsMenu({
   exercises,
@@ -15,7 +15,6 @@ export default function SettingsMenu({
   availablePlates,
   setAvailablePlates,
 }) {
-  const PLATE_OPTIONS = [25, 20, 15, 10, 5, 2.5, 2, 1.5, 1.25, 1, 0.5];
   const effectivePlates = availablePlates ?? DEFAULT_PLATES;
 
   const [open, setOpen] = useState(false);
