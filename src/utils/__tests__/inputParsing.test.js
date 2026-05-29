@@ -11,9 +11,9 @@ describe('parseExerciseInput', () => {
   });
 
   it('returns float for valid input with comma decimals', () => {
-    expect(parseExerciseInput('150,25')).toEqual({
+    expect(parseExerciseInput('150,2')).toEqual({
       valid: true,
-      value: 150.25,
+      value: 150.2,
     });
   });
 
@@ -66,11 +66,11 @@ describe('parseExerciseInput', () => {
   });
 
   it('returns null for input with too many decimal places', () => {
-    expect(parseExerciseInput('100.123')).toEqual({
+    expect(parseExerciseInput('100.12')).toEqual({
       valid: false,
       reason: 'too_many_decimals',
     });
-    expect(parseExerciseInput('150,456')).toEqual({
+    expect(parseExerciseInput('150,45')).toEqual({
       valid: false,
       reason: 'too_many_decimals',
     });
