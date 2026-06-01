@@ -12,6 +12,7 @@ describe('SettingsMenu', () => {
     deadlift: 130,
     other: 69,
   };
+
   it('renders the settings button', () => {
     render(<SettingsMenu />);
 
