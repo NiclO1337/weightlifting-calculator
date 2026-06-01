@@ -55,4 +55,16 @@ describe('SettingsMenu', () => {
     fireEvent.click(closeButton);
     expect(modal).not.toBeInTheDocument();
   });
+
+  it('closes the settings modal when clicking outside the panel', () => {
+    render(<SettingsMenu exercises={exercises} />);
+
+    const settingsButton = screen.getByRole('button', {
+      name: 'Open Settings',
+    });
+    fireEvent.click(settingsButton);
+    const modal = screen.getByRole('dialog');
+    fireEvent.click(modal);
+    expect(modal).not.toBeInTheDocument();
+    });
 });
