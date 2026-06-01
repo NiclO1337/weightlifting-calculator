@@ -39,22 +39,27 @@ export default function ExerciseSettings({ exercises, onChangeExerciseValue }) {
     <section aria-labelledby='exercise-settings'>
       <h3 className='special-font'>1 Rep Max values:</h3>
       <div className='settings-grid'>
-        {Object.keys(exercises).map((key) => (
+        {Object.keys(exercises).map((key) => {
+          const id = `exercise-${key}`;
+          const label = EXERCISE_LABELS[key] || key
+
+          return (
           <div key={key}>
             <label
-              htmlFor={`ex-${key}`}
-              aria-label={`Set ${EXERCISE_LABELS[key] || key} 1 rep max`}>
-              {EXERCISE_LABELS[key] || key}
+              htmlFor={id}
+              aria-label={`Set ${label} 1 rep max`}>
+              {label}
             </label>
             <input
-              id={`ex-${key}`}
+              id={id}
               type='text'
               inputMode='decimal'
               value={exerciseInputs[key] ?? ''}
               onChange={(e) => handleExerciseInputChange(key, e.target.value)}
             />
           </div>
-        ))}
+          )
+        })}
       </div>
       <hr />
     </section>
