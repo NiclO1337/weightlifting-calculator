@@ -14,8 +14,25 @@ describe('ExerciseSettings', () => {
     other: 69,
   };
 
+  const renderComponent = (props = {}) => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+
+    return {
+      user,
+      onChange,
+      ...render(
+        <ExerciseSettings
+          exercises={exercises}
+          onChangeExerciseValue={onChange}
+          {...props}
+        />,
+      ),
+    };
+  };
+
   it('renders input fields for each exercise', () => {
-    render(<ExerciseSettings exercises={exercises} />);
+    renderComponent();
     expect(
       screen.getByRole('textbox', { name: /snatch/i }),
     ).toBeInTheDocument();
@@ -28,7 +45,7 @@ describe('ExerciseSettings', () => {
   });
 
   it('displays the correct values in the input fields', () => {
-    render(<ExerciseSettings exercises={exercises} />);
+    renderComponent();
     expect(screen.getByRole('textbox', { name: /snatch/i })).toHaveValue('40');
     expect(screen.getByRole('textbox', { name: /deadlift/i })).toHaveValue(
       '130',
@@ -36,90 +53,60 @@ describe('ExerciseSettings', () => {
   });
 
   it('allows users to type decimal values', async () => {
-    const onChangeExerciseValue = vi.fn();
-
-    render(
-      <ExerciseSettings
-        exercises={exercises}
-        onChangeExerciseValue={onChangeExerciseValue}
-      />,
-    );
+    const { user } = renderComponent();
     const snatchInput = screen.getByRole('textbox', { name: /snatch/i });
 
-    await userEvent.clear(snatchInput);
-    await userEvent.type(snatchInput, '42.5');
+    await user.clear(snatchInput);
+    await user.type(snatchInput, '42.5');
     expect(snatchInput).toHaveValue('42.5');
   });
 
   it('prevents more than one decimal place', async () => {
-    const onChangeExerciseValue = vi.fn();
-
-    render(
-      <ExerciseSettings
-        exercises={exercises}
-        onChangeExerciseValue={onChangeExerciseValue}
-      />,
-    );
+    const { user } = renderComponent();
     const snatchInput = screen.getByRole('textbox', { name: /snatch/i });
 
-    await userEvent.clear(snatchInput);
-    await userEvent.type(snatchInput, '40.55');
+    await user.clear(snatchInput);
+    await user.type(snatchInput, '40.55');
     expect(snatchInput).toHaveValue('40.5');
   });
 
   it('calls onChangeExerciseValue with the correct values', async () => {
-    const onChangeExerciseValue = vi.fn();
-    render(
-      <ExerciseSettings
-        exercises={exercises}
-        onChangeExerciseValue={onChangeExerciseValue}
-      />,
-    );
+    const { user, onChange } = renderComponent();
     const snatchInput = screen.getByRole('textbox', { name: /snatch/i });
 
-    await userEvent.clear(snatchInput);
-    await userEvent.type(snatchInput, '42.5');
+    await user.clear(snatchInput);
+    await user.type(snatchInput, '42.5');
 
-    expect(onChangeExerciseValue).toHaveBeenCalledWith({
+    expect(onChange).toHaveBeenLastCalledWith({
       ...exercises,
       snatch: 42.5,
     });
   });
 
   it('allows incomplete decimal values to remain in the input', async () => {
-    const onChangeExerciseValue = vi.fn();
-    render(
-      <ExerciseSettings
-        exercises={exercises}
-        onChangeExerciseValue={onChangeExerciseValue}
-      />,
-    );
+    const { user } = renderComponent();
+
     const snatchInput = screen.getByRole('textbox', { name: /snatch/i });
 
-    await userEvent.clear(snatchInput);
-    await userEvent.type(snatchInput, '40.');
+    await user.clear(snatchInput);
+    await user.type(snatchInput, '40.');
 
     expect(snatchInput).toHaveValue('40.');
   });
 
-  it('does not update the parent when typing an incomplete decimal', async () => {
-    const onChangeExerciseValue = vi.fn();
-    render(
-      <ExerciseSettings
-        exercises={exercises}
-        onChangeExerciseValue={onChangeExerciseValue}
-      />,
-    );
+  it('does not call onChange when typing an incomplete decimal', async () => {
+    const { user, onChange } = renderComponent();
+
     const snatchInput = screen.getByRole('textbox', { name: /snatch/i });
 
-    await userEvent.clear(snatchInput);
-    await userEvent.type(snatchInput, '40');
+    await user.clear(snatchInput);
+    await user.type(snatchInput, '40');
 
-    const callsAfter40 = onChangeExerciseValue.mock.calls.length;
+    const callsAfter40 = onChange.mock.calls.length;
 
-    await userEvent.type(snatchInput, '.');
+    await user.type(snatchInput, '.');
 
     expect(snatchInput).toHaveValue('40.');
-    expect(onChangeExerciseValue).toHaveBeenCalledTimes(callsAfter40);
+    expect(onChange).toHaveBeenCalledTimes(callsAfter40);
   });
 });

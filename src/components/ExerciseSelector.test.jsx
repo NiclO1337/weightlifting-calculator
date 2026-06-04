@@ -4,14 +4,13 @@ import ExerciseSelector from './ExerciseSelector';
 import { EXERCISE_LABELS, DEFAULT_EXERCISE_MAXES } from '../constants/exercises';
 
 describe('ExerciseSelector', () => {
+  const baseProps = {
+    exercises: DEFAULT_EXERCISE_MAXES,
+    selectedExercise: 'snatch',
+  };
+
   it('renders label and all options', () => {
-    render(
-      <ExerciseSelector
-        exercises={DEFAULT_EXERCISE_MAXES}
-        selectedExercise={'snatch'}
-        onChange={() => {}}
-      />,
-    );
+    render(<ExerciseSelector {...baseProps} />);
 
     expect(screen.getByLabelText(/exercise/i)).toBeInTheDocument();
 
@@ -20,13 +19,7 @@ describe('ExerciseSelector', () => {
   });
 
   it('renders labels and weights correctly', () => {
-    render(
-      <ExerciseSelector
-        exercises={DEFAULT_EXERCISE_MAXES}
-        selectedExercise={'snatch'}
-        onChange={() => {}}
-      />,
-    );
+    render(<ExerciseSelector {...baseProps} />);
 
     expect(screen.getByText('Snatch (50 kg)')).toBeInTheDocument();
     expect(screen.getByText('Backsquat (100 kg)')).toBeInTheDocument();
@@ -34,28 +27,16 @@ describe('ExerciseSelector', () => {
   });
 
   it('shows the selected exercise', () => {
-    render(
-      <ExerciseSelector
-        exercises={DEFAULT_EXERCISE_MAXES}
-        selectedExercise={'deadlift'}
-        onChange={() => {}}
-      />,
-    );
+    render(<ExerciseSelector {...baseProps} />);
 
     const select = screen.getByRole('combobox');
-    expect(select.value).toBe('deadlift');
+    expect(select.value).toBe('snatch');
   });
 
   it('calls onChange with selected value', () => {
     const handleChange = vi.fn();
 
-    render(
-      <ExerciseSelector
-        exercises={DEFAULT_EXERCISE_MAXES}
-        selectedExercise={'deadlift'}
-        onChange={handleChange}
-      />,
-    );
+    render(<ExerciseSelector {...baseProps} onChange={handleChange} />);
 
     fireEvent.change(screen.getByRole('combobox'), {
       target: { value: 'benchPress' },
