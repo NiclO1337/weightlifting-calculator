@@ -12,10 +12,8 @@ export default function PercentageList({
     <div className='percentages-list'>
       <ul>
         {PERCENTAGE_RANGE.map((p) => (
-          <li key={p} className={selectedPercentage === p && 'highlighted'}>
-            <button
-
-              onClick={() => onSelect(p)}>
+          <li key={p} className={selectedPercentage === p ? 'highlighted' : undefined}>
+            <button onClick={() => onSelect(p)}>
               {p}% - {roundToIncrement((oneRepMax * p) / 100, rounding)} kg
             </button>
             <span className='arrow'>
