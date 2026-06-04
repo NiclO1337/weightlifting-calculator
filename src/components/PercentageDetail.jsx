@@ -14,10 +14,10 @@ export default function PercentageDetail({
     <div className='percentages-detail'>
       <ul>
         {range.map((p) => (
-          <li>
-          <button key={p} onClick={() => onSave(p)}>
-            {p}% - {roundToIncrement(oneRepMax * p / 100, rounding)} kg
-          </button>
+          <li key={p}>
+            <button onClick={() => onSave(p)}>
+              {p}% - {roundToIncrement((oneRepMax * p) / 100, rounding)} kg
+            </button>
           </li>
         ))}
       </ul>

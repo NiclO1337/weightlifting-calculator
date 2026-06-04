@@ -67,6 +67,16 @@ h1 {
   padding: 0.3em 0;
 }
 
+.percentages-detail button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
 .highlighted,
 .highlighted button {
   color: var(--color-primary-hover);
@@ -364,8 +374,6 @@ legend {
 @media (min-width: 768px) {
   .percentages-list button {
     font-size: 1.2rem;
-  }
-  .percentages-list button {
     padding: 0.3em 0 0.3em 1em;
   }
   h1 {
