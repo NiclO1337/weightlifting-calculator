@@ -28,6 +28,7 @@ describe('RoundingSelector', () => {
   it('calls onChange with correct number', () => {
     const handleChange = vi.fn();
     render(<RoundingSelector rounding={1} onChange={handleChange} />);
+
     fireEvent.change(screen.getByLabelText(/round to/i), { target: { value: '5' } });
     expect(handleChange).toHaveBeenCalledWith(5);
   });

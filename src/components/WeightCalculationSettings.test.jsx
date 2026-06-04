@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+import { userEvent } from '@testing-library/user-event';
 import WeightCalculationSettings from './WeightCalculationSettings';
 
 describe('WeightCalculationSettings', () => {
@@ -8,7 +9,9 @@ describe('WeightCalculationSettings', () => {
 
   const renderComponent = (props = {}) => {
     const setAvailablePlates = vi.fn();
+    const user = userEvent.setup();
     return {
+      user,
       setAvailablePlates,
       ...render(
         <WeightCalculationSettings
@@ -60,18 +63,18 @@ describe('WeightCalculationSettings', () => {
     expect(screen.getByRole('checkbox', { name: `20 kg` })).toBeChecked();
   });
 
-  it('reset button calls setAvailablePlates with null', () => {
-    const { setAvailablePlates } = renderComponent();
+  it('reset button calls setAvailablePlates with null', async () => {
+    const { user, setAvailablePlates } = renderComponent();
 
     const resetButton = screen.getByRole('button', {
       name: /reset to default/i,
     });
-    fireEvent.click(resetButton);
+    await user.click(resetButton);
     expect(setAvailablePlates).toHaveBeenCalledWith(null);
   });
 
-  it('toggling a checked plate removes it from available plates', () => {
-    const { setAvailablePlates } = renderComponent({
+  it('toggling a checked plate removes it from available plates', async () => {
+    const { user, setAvailablePlates } = renderComponent({
       availablePlates: availableTestPlates,
     });
 
@@ -80,12 +83,12 @@ describe('WeightCalculationSettings', () => {
       name: `${plateToToggle} kg`,
     });
 
-    fireEvent.click(checkbox);
+    await user.click(checkbox);
     expect(setAvailablePlates).toHaveBeenCalledWith([20, 5]);
   });
 
-  it('toggling an unchecked plate adds it to available plates', () => {
-    const { setAvailablePlates } = renderComponent({
+  it('toggling an unchecked plate adds it to available plates', async () => {
+    const { user, setAvailablePlates } = renderComponent({
       availablePlates: availableTestPlates,
     });
 
@@ -94,7 +97,7 @@ describe('WeightCalculationSettings', () => {
       name: `${plateToToggle} kg`,
     });
 
-    fireEvent.click(checkbox);
+    await user.click(checkbox);
     expect(setAvailablePlates).toHaveBeenCalledWith([20, 15, 10, 5]);
   });
 });

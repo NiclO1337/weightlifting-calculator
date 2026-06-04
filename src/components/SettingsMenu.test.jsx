@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import { userEvent } from '@testing-library/user-event';
 import SettingsMenu from './SettingsMenu';
 
 describe('SettingsMenu', () => {
@@ -13,8 +14,16 @@ describe('SettingsMenu', () => {
     other: 69,
   };
 
+  const renderComponent = (props = {}) => {
+    const user = userEvent.setup();
+    return {
+      user,
+      ...render(<SettingsMenu exercises={exercises} {...props} />),
+    };
+  };
+
   it('renders the settings button', () => {
-    render(<SettingsMenu />);
+    renderComponent();
 
     const settingsButton = screen.getByRole('button', {
       name: 'Open Settings',
@@ -23,49 +32,50 @@ describe('SettingsMenu', () => {
   });
 
   it('does not render the settings modal by default', () => {
-    render(<SettingsMenu />);
+    renderComponent();
 
     const modal = screen.queryByRole('dialog');
     expect(modal).not.toBeInTheDocument();
   });
 
-  it('opens the settings modal when the button is clicked', () => {
-    render(<SettingsMenu exercises={exercises} />);
+  it('opens the settings modal when the button is clicked', async () => {
+    const { user } = renderComponent();
 
     const settingsButton = screen.getByRole('button', {
       name: 'Open Settings',
     });
 
-    fireEvent.click(settingsButton);
+    await user.click(settingsButton);
     const modal = screen.getByRole('dialog');
     expect(modal).toBeInTheDocument();
   });
 
-  it('closes the settings modal when the close button is clicked', () => {
-    render(<SettingsMenu exercises={exercises} />);
+  it('closes the settings modal when the close button is clicked', async () => {
+    const { user } = renderComponent();
 
     const settingsButton = screen.getByRole('button', {
       name: 'Open Settings',
     });
-    fireEvent.click(settingsButton);
+    await user.click(settingsButton);
 
     const modal = screen.getByRole('dialog');
     const closeButton = screen.getByRole('button', {
       name: 'Close Settings',
     });
-    fireEvent.click(closeButton);
+    await user.click(closeButton);
     expect(modal).not.toBeInTheDocument();
   });
 
-  it('closes the settings modal when clicking outside the panel', () => {
-    render(<SettingsMenu exercises={exercises} />);
+  it('closes the settings modal when clicking outside the panel', async () => {
+    const { user } = renderComponent();
 
     const settingsButton = screen.getByRole('button', {
       name: 'Open Settings',
     });
-    fireEvent.click(settingsButton);
+    await user.click(settingsButton);
+
     const modal = screen.getByRole('dialog');
-    fireEvent.click(modal);
+    await user.click(modal);
     expect(modal).not.toBeInTheDocument();
-    });
+  });
 });
