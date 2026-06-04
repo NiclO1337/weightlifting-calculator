@@ -5,7 +5,7 @@
 
   --color-primary-dark: #070f20;
   --color-primary-light: #b7d5e6;
-  --color-primary-hover: #83d8ff;
+  --color-primary-hover: #1e4eb6;
 
   color-scheme: light dark;
   color: var(--color-primary-light);
