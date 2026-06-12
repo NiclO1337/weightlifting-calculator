@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 
 import Header from './components/Header';
@@ -12,73 +12,38 @@ import SavedPercentages from './components/SavedPercentages';
 
 import { DEFAULT_EXERCISE_MAXES } from './constants/exercises';
 
+import { useLocalStorage } from './hooks/useLocalStorage';
+
 function App() {
-  const [exercises, setExercises] = useState(() => {
-    const legacy = localStorage.getItem('oneRepMax');
-    const stored = localStorage.getItem('exercises1RM');
-    if (stored) return JSON.parse(stored);
-    if (legacy) {
-      const val = Number(legacy) || DEFAULT_EXERCISE_MAXES.snatch;
-      return { ...DEFAULT_EXERCISE_MAXES, snatch: val };
-    }
-    return DEFAULT_EXERCISE_MAXES;
-  });
+  const [exercises, setExercises] = useLocalStorage(
+    'oneRepMax',
+    DEFAULT_EXERCISE_MAXES,
+  );
 
-  const [selectedExercise, setSelectedExercise] = useState(() => {
-    const stored = localStorage.getItem('selectedExercise');
-    return stored ? stored : 'snatch';
-  });
+  const [selectedExercise, setSelectedExercise] = useLocalStorage(
+    'selectedExercise',
+    'snatch',
+  );
 
-  const [rounding, setRounding] = useState(() => {
-    const stored = localStorage.getItem('rounding');
-    return stored ? Number(stored) : 0.5;
-  });
+  const [barbellWeight, setBarbellWeight] = useLocalStorage(
+    'barbellWeight',
+    15,
+  );
 
-  const [barbellWeight, setBarbellWeight] = useState(() => {
-    const stored = localStorage.getItem('barbellWeight');
-    return stored ? Number(stored) : 15;
-  });
+  const [availablePlates, setAvailablePlates] = useLocalStorage(
+    'availablePlates',
+    null,
+  );
 
-  const [availablePlates, setAvailablePlates] = useState(() => {
-    const stored = localStorage.getItem('availablePlates');
-    return stored ? JSON.parse(stored) : null;
-  });
+  const [savedPercentages, setSavedPercentages] = useLocalStorage(
+    'savedPercentages',
+    [73, 77, 81],
+  );
 
-  const [savedPercentages, setSavedPercentages] = useState(() => {
-    const stored = localStorage.getItem('savedPercentages');
-    return stored ? JSON.parse(stored) : [73, 77, 81];
-  });
+  const [rounding, setRounding] = useLocalStorage('rounding', 0.5);
 
   const [selectedPercentage, setSelectedPercentage] = useState(70);
   const [showTutorial, setShowTutorial] = useState(false);
-
-  useEffect(() => {
-    localStorage.setItem('exercises1RM', JSON.stringify(exercises));
-  }, [exercises]);
-
-  useEffect(() => {
-    localStorage.setItem('selectedExercise', selectedExercise);
-  }, [selectedExercise]);
-
-  useEffect(() => {
-    if (availablePlates === null) {
-      localStorage.removeItem('availablePlates');
-    } else {
-      localStorage.setItem('availablePlates', JSON.stringify(availablePlates));
-    }
-  }, [availablePlates]);
-
-  useEffect(() => {
-    localStorage.setItem('rounding', rounding);
-  }, [rounding]);
-
-  useEffect(() => {
-    localStorage.setItem('barbellWeight', barbellWeight);
-  }, [barbellWeight]);
-
-  useEffect(() => {
-    localStorage.setItem('savedPercentages', JSON.stringify(savedPercentages));
-  }, [savedPercentages]);
 
   const handleSavePercentage = (percent) => {
     if (!savedPercentages.includes(percent)) {
