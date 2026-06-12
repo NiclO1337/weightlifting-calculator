@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getPlatesPerSide } from '../calculatePlates';
+import { getPlatesPerSide } from './calculatePlates';
 
 describe('getPlatesPerSide', () => {
   it('returns correct plates for standard weights', () => {

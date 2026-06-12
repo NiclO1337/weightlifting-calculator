@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { roundToIncrement } from '../math';
+import { roundToIncrement } from './math';
 
 describe('roundToIncrement', () => {
   it('rounds to nearest 0.5 by default', () => {
