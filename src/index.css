@@ -58,23 +58,20 @@ h1 {
   font-style: normal;
 }
 
-.percentages-list button {
-  background-color: transparent;
-  color: var(--color-primary-dark);
-  border: none;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.3em 0;
-}
-
-.percentages-detail button {
+.percentage-container button {
   background: none;
-  border: none;
-  font: inherit;
   color: inherit;
+  border: none;
   cursor: pointer;
+  font: inherit;
   padding: 0;
   margin: 0;
+}
+
+.percentages-list button {
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding-left: 1rem;
 }
 
 .highlighted,
@@ -374,7 +371,6 @@ legend {
 @media (min-width: 768px) {
   .percentages-list button {
     font-size: 1.2rem;
-    padding: 0.3em 0 0.3em 1em;
   }
   h1 {
     font-size: 2.5em;
