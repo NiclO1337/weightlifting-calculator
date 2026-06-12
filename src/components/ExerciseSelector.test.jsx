@@ -22,7 +22,7 @@ describe('ExerciseSelector', () => {
     render(<ExerciseSelector {...baseProps} />);
 
     expect(screen.getByText('Snatch (50 kg)')).toBeInTheDocument();
-    expect(screen.getByText('Backsquat (100 kg)')).toBeInTheDocument();
+    expect(screen.getByText('Back squat (100 kg)')).toBeInTheDocument();
     expect(screen.getByText('Deadlift (130 kg)')).toBeInTheDocument();
   });
 

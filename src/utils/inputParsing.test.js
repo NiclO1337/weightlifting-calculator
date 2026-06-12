@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseExerciseInput } from '../inputParsing';
+import { parseExerciseInput } from './inputParsing';
 
 describe('parseExerciseInput', () => {
   it('returns interger for valid input', () => {
