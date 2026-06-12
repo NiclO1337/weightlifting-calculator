@@ -1,8 +1,8 @@
 export const EXERCISE_LABELS = {
   snatch: 'Snatch',
   cleanAndJerk: 'Clean & Jerk',
-  frontSquat: 'Frontsquat',
-  backSquat: 'Backsquat',
+  frontSquat: 'Front squat',
+  backSquat: 'Back squat',
   benchPress: 'Bench press',
   deadlift: 'Deadlift',
   other: 'Custom exercise',
