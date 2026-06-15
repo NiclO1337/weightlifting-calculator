@@ -11,7 +11,7 @@ export default function PercentageDetail({
   const range = Array.from({ length: 10 }, (_, i) => percentage + i);
 
   return (
-    <div className='percentages-detail'>
+    <section aria-label='Percentage detail' className='percentages-detail'>
       <ul>
         {range.map((p) => (
           <li key={p}>
@@ -21,6 +21,6 @@ export default function PercentageDetail({
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }

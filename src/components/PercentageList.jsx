@@ -9,10 +9,12 @@ export default function PercentageList({
   selectedPercentage,
 }) {
   return (
-    <div className='percentages-list'>
+    <section aria-label='Percentage list' className='percentages-list'>
       <ul>
         {PERCENTAGE_RANGE.map((p) => (
-          <li key={p} className={selectedPercentage === p ? 'highlighted' : undefined}>
+          <li
+            key={p}
+            className={selectedPercentage === p ? 'highlighted' : undefined}>
             <button onClick={() => onSelect(p)}>
               {p}% - {roundToIncrement((oneRepMax * p) / 100, rounding)} kg
             </button>
@@ -22,6 +24,6 @@ export default function PercentageList({
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
