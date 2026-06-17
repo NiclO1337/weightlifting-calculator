@@ -16,7 +16,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 
 function App() {
   const [exercises, setExercises] = useLocalStorage(
-    'oneRepMax',
+    'exercises1RM',
     DEFAULT_EXERCISE_MAXES,
   );
 
