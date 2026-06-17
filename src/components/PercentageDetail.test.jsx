@@ -7,24 +7,21 @@ describe('PercentageDetail', () => {
   it('renders the percentage and weight correctly', () => {
     render(<PercentageDetail percentage={70} oneRepMax={100} />);
 
-    expect(screen.getByRole('button', { name: /70%/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /70 kg/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /71% - 71 kg/i }),
+    ).toBeInTheDocument();
   });
 
   it('calls onSave when the component is clicked', async () => {
     const onSave = vi.fn();
     const user = userEvent.setup();
     render(
-      <PercentageDetail
-        percentage={70}
-        oneRepMax={100}
-        onSave={onSave}
-      />,
+      <PercentageDetail percentage={70} oneRepMax={100} onSave={onSave} />,
     );
-    const component = screen.getByRole('button', { name: /70%/i });
+    const component = screen.getByRole('button', { name: /75%/i });
     await user.click(component);
 
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith(70);
+    expect(onSave).toHaveBeenCalledWith(75);
   });
 });

@@ -17,14 +17,16 @@ export default function SavedPercentages({
     return <div className='saved-percentages'>No saved percentages</div>;
 
   return (
-    <div className='saved-percentages special-font'>
+    <section
+      aria-label='Saved percentages'
+      className='saved-percentages special-font'>
       <ul>
         {percentages.map((p) => {
           const totalWeight = roundToIncrement((oneRepMax * p) / 100, rounding);
           const platesPerSide = getPlatesPerSide(
             totalWeight,
             barbellWeight,
-            availablePlates || undefined
+            availablePlates || undefined,
           );
 
           return (
@@ -51,6 +53,6 @@ export default function SavedPercentages({
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 }

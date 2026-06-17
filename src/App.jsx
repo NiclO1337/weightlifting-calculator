@@ -16,7 +16,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 
 function App() {
   const [exercises, setExercises] = useLocalStorage(
-    'oneRepMax',
+    'exercises1RM',
     DEFAULT_EXERCISE_MAXES,
   );
 
@@ -61,7 +61,7 @@ function App() {
     <>
       <Header showTutorial={showTutorial} setShowTutorial={setShowTutorial} />
 
-      <div className='settings-container'>
+      <section aria-label='Settings' className='settings-container'>
         <ExerciseSelector
           exercises={exercises}
           selectedExercise={selectedExercise}
@@ -77,7 +77,7 @@ function App() {
           availablePlates={availablePlates}
           setAvailablePlates={setAvailablePlates}
         />
-      </div>
+      </section>
 
       <div className='percentage-container'>
         <PercentageList
