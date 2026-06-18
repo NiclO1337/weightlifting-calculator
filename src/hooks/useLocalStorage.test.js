@@ -7,13 +7,13 @@ describe('useLocalStorage', () => {
     localStorage.clear();
   });
 
-  it('returns initial value when localStorage is empty', () => {
+  it('returns specified value when localStorage is empty', () => {
     const { result } = renderHook(() => useLocalStorage('rounding', 0.5));
 
     expect(result.current[0]).toBe(0.5);
   });
 
-  it('loads existing value from localStorage', () => {
+  it('loads existing value from localStorage instead of specified value', () => {
     localStorage.setItem('rounding', JSON.stringify(2.5));
 
     const { result } = renderHook(() => useLocalStorage('rounding', 0.5));
