@@ -39,8 +39,8 @@ describe('SavedPercentages', () => {
   it('displays the remove button when an item is selected', async () => {
     const { user } = renderComponent();
 
-    const percentageItem = screen.getByText(/70%/i).closest('li');
-    await user.click(percentageItem);
+    const percentageButton = screen.getByRole('button', { name: /70%/i })
+    await user.click(percentageButton);
 
     const removeButton = screen.getByRole('button', { name: /remove/i });
     expect(removeButton).toBeInTheDocument();
@@ -49,8 +49,8 @@ describe('SavedPercentages', () => {
   it('calls onRemove with the correct percentage when the remove button is clicked', async () => {
     const { user, onRemove } = renderComponent();
 
-    const percentageItem = screen.getByText(/70%/i).closest('li');
-    await user.click(percentageItem);
+    const percentageButton = screen.getByRole('button', { name: /70%/i })
+    await user.click(percentageButton);
 
     const removeButton = screen.getByRole('button', { name: /remove/i });
     await user.click(removeButton);

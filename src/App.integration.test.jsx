@@ -102,18 +102,18 @@ describe('App', () => {
 
   it('removing saved percentage removes it from the list', async () => {
     const { user } = renderComponent({
-      localStorageSeed: { savedPercentages: [73, 75, 77] }
+      localStorageSeed: { savedPercentages: [73, 75, 77] },
     });
 
     const section = getSavedPercentagesSection();
 
     expect(section).toHaveTextContent(/75%/i);
 
-    const savedItem = within(section).getByText(/75%/i);
+    const savedItem = within(section).getByRole('button', { name: /75%/i });
 
     await user.click(savedItem);
 
-    const removeButton = within(savedItem).getByRole('button', {
+    const removeButton = within(section).getByRole('button', {
       name: /remove/i,
     });
 
@@ -125,25 +125,33 @@ describe('App', () => {
   it('saves selected settings to local storage', async () => {
     const { user } = renderComponent();
 
-    const settingsButton = screen.getByRole('button', { name: /Open Settings/i });
+    const settingsButton = screen.getByRole('button', {
+      name: /Open Settings/i,
+    });
 
     await user.click(settingsButton);
 
-    const roundingSetting = screen.getByRole('combobox', { name: /Round to:/i });
+    const roundingSetting = screen.getByRole('combobox', {
+      name: /Round to:/i,
+    });
 
     await user.selectOptions(roundingSetting, '2.5');
 
     expect(JSON.parse(localStorage.getItem('rounding'))).toBe(2.5);
-  })
+  });
 
   it('changes plate loading when barbell weight changes', async () => {
     const { user } = renderComponent();
 
     const section = getSavedPercentagesSection();
 
-    const oldLoading = within(section).getByText(/73%/i).textContent
+    const oldLoading = within(section).getByRole('button', {
+      name: /73%/i,
+    }).textContent;
 
-    const settingsButton = screen.getByRole('button', { name: /Open Settings/i });
+    const settingsButton = screen.getByRole('button', {
+      name: /Open Settings/i,
+    });
 
     await user.click(settingsButton);
 
@@ -151,7 +159,9 @@ describe('App', () => {
 
     await user.selectOptions(barbellSetting, '20');
 
-    const newLoading = within(section).getByText(/73%/i).textContent
+    const newLoading = within(section).getByRole('button', {
+      name: /73%/i,
+    }).textContent;
 
     expect(newLoading).not.toBe(oldLoading);
   });
