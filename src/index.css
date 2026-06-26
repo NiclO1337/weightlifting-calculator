@@ -254,19 +254,27 @@ hr {
 .btn {
   display: inline-block;
   margin-left: 1rem;
-  padding: 0.2rem 0.4rem;
+  padding: 0.05rem 0.4rem 0.2rem 0.4rem;
   border-radius: 0.3rem;
   font-size: 0.8rem;
 }
 
 .btn-reset {
   background-color: var(--color-primary-dark);
-  color: var(--color-primary-light);
+  color: var(--color-white);
 }
 
 .btn-remove {
   background-color: var(--color-danger);
   color: var(--color-white);
+  position: absolute;
+  font-weight: 500;
+  margin-left: -3rem;
+  margin-top: 0.5rem;
+}
+
+.offset-text {
+  padding-right: 4rem;
 }
 
 .plate-viz {

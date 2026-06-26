@@ -17,9 +17,7 @@ export default function SavedPercentages({
     return <div className='saved-percentages'>No saved percentages</div>;
 
   return (
-    <section
-      aria-label='Saved percentages'
-      className='saved-percentages special-font'>
+    <section aria-label='Saved percentages' className='saved-percentages'>
       <ul>
         {percentages.map((p) => {
           const totalWeight = roundToIncrement((oneRepMax * p) / 100, rounding);
@@ -30,8 +28,20 @@ export default function SavedPercentages({
           );
 
           return (
-            <li key={p} onClick={() => setSelected(selected === p ? null : p)}>
-              {p}% - {totalWeight} kg
+            <li key={p}>
+              <button
+                className='special-font'
+                onClick={() => setSelected(selected === p ? null : p)}>
+                <span className={selected === p ? 'offset-text' : null}>
+                  {p}% - {totalWeight} kg
+                </span>
+                <span className='text-smaller'>
+                  <br />( {formatPlates(platesPerSide)} )
+                </span>
+                <div className='plate-viz'>
+                  <BarbellVisualization plates={platesPerSide} />
+                </div>
+              </button>
               {selected === p && (
                 <button
                   className='btn btn-remove'
@@ -43,12 +53,6 @@ export default function SavedPercentages({
                   Remove
                 </button>
               )}
-              <span className='text-smaller'>
-                <br />( {formatPlates(platesPerSide)} )
-              </span>
-              <div className='plate-viz'>
-                <BarbellVisualization plates={platesPerSide} />
-              </div>
             </li>
           );
         })}
