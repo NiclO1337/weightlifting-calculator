@@ -1,6 +1,6 @@
 export default function BarbellSelector({ barbellWeight, onChange }) {
   return (
-    <div className='barbell-selector'>
+    <div>
       <label htmlFor='barbell-weight'>Barbell:</label>
       <select
         name='barbell-weight'

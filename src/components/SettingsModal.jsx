@@ -1,4 +1,5 @@
 import { X } from 'lucide-react';
+import './SettingsModal.css';
 
 export default function SettingsModal({ onClose, children }) {
   return (
@@ -6,7 +7,6 @@ export default function SettingsModal({ onClose, children }) {
       className='settings-overlay'
       role='dialog'
       aria-modal='true'
-      aria-labelledby='settings-heading'
       onClick={onClose}>
       <div className='settings-panel' onClick={(e) => e.stopPropagation()}>
         <button
@@ -16,7 +16,7 @@ export default function SettingsModal({ onClose, children }) {
           <X size={30} />
         </button>
 
-        <h2 id='settings-heading' className='special-font'>
+        <h2 aria-labelledby='settings-heading' className='special-font'>
           Settings
         </h2>
         <hr />

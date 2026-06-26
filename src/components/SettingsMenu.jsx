@@ -2,6 +2,7 @@ import { useState } from 'react';
 import SettingsModal from './SettingsModal';
 import ExerciseSettings from './ExerciseSettings';
 import WeightCalculationSettings from './WeightCalculationSettings';
+import './SettingsMenu.css'
 import { Settings } from 'lucide-react';
 
 export default function SettingsMenu({

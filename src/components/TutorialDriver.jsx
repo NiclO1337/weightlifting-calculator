@@ -1,6 +1,7 @@
 import { forwardRef, useImperativeHandle } from 'react';
 import { driver } from 'driver.js';
 import 'driver.js/dist/driver.css';
+import './TutorialDriver.css'
 
 const TutorialDriver = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({

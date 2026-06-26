@@ -1,6 +1,6 @@
 export default function RoundingSelector({ rounding, onChange }) {
   return (
-    <div className='rounding-selector'>
+    <div>
       <label htmlFor='rounding'>Round to: </label>
       <select
         id='rounding'
