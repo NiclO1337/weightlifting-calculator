@@ -15,7 +15,7 @@ export default function SavedPercentages({
   const [selected, setSelected] = useState(false);
 
   if (percentages.length === 0)
-    return <div className='saved-percentages'>No saved percentages</div>;
+    return <div className='saved-percentages special-font'>No saved percentages</div>;
 
   return (
     <section aria-label='Saved percentages' className='saved-percentages'>
