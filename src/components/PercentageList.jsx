@@ -1,6 +1,7 @@
 import { roundToIncrement } from '../utils/math.js';
 import { ArrowRight } from 'lucide-react';
 import { PERCENTAGE_RANGE } from '../constants/percentages.js';
+import './PercentageList.css'
 
 export default function PercentageList({
   onSelect,

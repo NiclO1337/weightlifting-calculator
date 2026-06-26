@@ -1,4 +1,5 @@
 import { roundToIncrement } from '../utils/math.js';
+import './PercentageDetail.css'
 
 export default function PercentageDetail({
   percentage,

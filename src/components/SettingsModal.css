@@ -1,0 +1,34 @@
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.settings-panel h3 {
+  margin: 0;
+}
+
+.settings-panel {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 700px;
+  max-height: calc(100vh - 2rem);
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.settings-close {
+  color: var(--color-primary-dark);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}

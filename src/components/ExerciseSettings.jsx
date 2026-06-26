@@ -38,7 +38,7 @@ export default function ExerciseSettings({ exercises, onChangeExerciseValue }) {
   return (
     <section aria-labelledby='exercise-settings'>
       <h3 className='special-font'>1 Rep Max values:</h3>
-      <div className='settings-grid'>
+      <div>
         {Object.keys(exercises).map((key) => {
           const id = `exercise-${key}`;
           const label = EXERCISE_LABELS[key] || key

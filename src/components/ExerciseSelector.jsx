@@ -1,4 +1,5 @@
 import { EXERCISE_LABELS } from '../constants/exercises';
+import './ExerciseSelector.css'
 
 export default function ExerciseSelector({
   exercises,

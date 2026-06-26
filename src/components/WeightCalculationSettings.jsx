@@ -2,6 +2,7 @@ import RoundingSelector from './RoundingSelector';
 import BarbellSelector from './BarbellSelector';
 import { EXERCISE_LABELS } from '../constants/exercises';
 import { DEFAULT_PLATES, PLATE_OPTIONS } from '../constants/plates';
+import './WeightCalculationSettings.css'
 
 export default function WeightCalculationSettings({
   rounding,
