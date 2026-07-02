@@ -10,6 +10,11 @@
   margin: 1rem auto;
 }
 
+.saved-percentages ul li {
+  animation: slideIn 0.35s ease forwards;
+  overflow: hidden;
+}
+
 .btn-remove {
   background-color: var(--color-danger);
   color: var(--color-white);
@@ -23,4 +28,23 @@
   display: inline-block;
   vertical-align: middle;
   margin-left: 0.5rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scaleY(0.85);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    max-height: 200px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saved-percentages ul li {
+    animation: none;
+  }
 }
