@@ -4,9 +4,9 @@
 }
 
 .percentages-list button {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
 }
 
 .highlighted {
@@ -14,12 +14,24 @@
 }
 
 .arrow {
-  padding-left: 0.4rem;
+  padding-left: 0.15rem;
   vertical-align: middle;
+}
+
+@media (min-width: 340px) {
+  .percentages-list button {
+    font-size: 1.1rem;
+    padding-left: 0.5rem;
+  }
 }
 
 @media (min-width: 768px) {
   .percentages-list button {
     font-size: 1.2rem;
+    padding-left: 1.5rem;
+  }
+
+  .arrow {
+    padding-left: 0.4rem;
   }
 }
