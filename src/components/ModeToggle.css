@@ -1,0 +1,16 @@
+.mode-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mode-toggle button {
+  padding: 0.4rem 0.9rem;
+  border-radius: 1.5rem;
+  border: 2px solid var(--color-primary-light);
+  font-weight: bold;
+}
+
+.mode-toggle button.active {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}

@@ -165,4 +165,49 @@ describe('App', () => {
 
     expect(newLoading).not.toBe(oldLoading);
   });
+
+  it('switches to Free Calc, loads a plate, then removes it', async () => {
+    const { user } = renderComponent();
+
+    await user.click(screen.getByRole('button', { name: /free calc/i }));
+
+    const freeCalcSection = screen.getByRole('region', { name: /Free calc/i });
+    const getTotal = () =>
+      within(freeCalcSection).getByText(/kg/i, { selector: '.free-calc-total' });
+
+    expect(getTotal()).toHaveTextContent('15 kg');
+
+    await user.click(
+      within(freeCalcSection).getByRole('button', { name: /add 20 kg plate/i }),
+    );
+
+    expect(getTotal()).toHaveTextContent('55 kg');
+
+    await user.click(
+      within(freeCalcSection).getByRole('button', {
+        name: /remove 20 kg plate/i,
+      }),
+    );
+
+    expect(getTotal()).toHaveTextContent('15 kg');
+  });
+
+  it('changes the barbell weight from the Free Calc page', async () => {
+    const { user } = renderComponent();
+
+    await user.click(screen.getByRole('button', { name: /free calc/i }));
+
+    const freeCalcSection = screen.getByRole('region', { name: /Free calc/i });
+    const getTotal = () =>
+      within(freeCalcSection).getByText(/kg/i, { selector: '.free-calc-total' });
+
+    expect(getTotal()).toHaveTextContent('15 kg');
+
+    await user.click(
+      within(freeCalcSection).getByRole('button', { name: /^20 kg$/i }),
+    );
+
+    expect(getTotal()).toHaveTextContent('20 kg');
+    expect(JSON.parse(localStorage.getItem('barbellWeight'))).toBe(20);
+  });
 });

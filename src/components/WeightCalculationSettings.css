@@ -21,4 +21,5 @@
 .btn-reset {
   background-color: var(--color-primary-dark);
   color: var(--color-primary-light);
+  margin: 0;
 }
