@@ -9,6 +9,8 @@ import BarbellSelector from './components/BarbellSelector';
 import PercentageList from './components/PercentageList';
 import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
+import ModeToggle from './components/ModeToggle';
+import FreeCalc from './components/FreeCalc';
 
 import { DEFAULT_EXERCISE_MAXES } from './constants/exercises';
 
@@ -42,6 +44,8 @@ function App() {
 
   const [rounding, setRounding] = useLocalStorage('rounding', 0.5);
 
+  const [mode, setMode] = useLocalStorage('calcMode', 'oneRM');
+
   const [selectedPercentage, setSelectedPercentage] = useState(70);
   const [showTutorial, setShowTutorial] = useState(false);
 
@@ -61,12 +65,8 @@ function App() {
     <>
       <Header showTutorial={showTutorial} setShowTutorial={setShowTutorial} />
 
-      <section aria-label='Settings' className='settings-container'>
-        <ExerciseSelector
-          exercises={exercises}
-          selectedExercise={selectedExercise}
-          onChange={setSelectedExercise}
-        />
+      <div className='top-bar'>
+        <ModeToggle mode={mode} onChange={setMode} />
         <SettingsMenu
           exercises={exercises}
           onChangeExerciseValue={setExercises}
@@ -77,30 +77,50 @@ function App() {
           availablePlates={availablePlates}
           setAvailablePlates={setAvailablePlates}
         />
-      </section>
-
-      <div className='percentage-container'>
-        <PercentageList
-          onSelect={setSelectedPercentage}
-          oneRepMax={oneRepMax}
-          rounding={rounding}
-          selectedPercentage={selectedPercentage}
-        />
-        <PercentageDetail
-          percentage={selectedPercentage}
-          oneRepMax={oneRepMax}
-          rounding={rounding}
-          onSave={handleSavePercentage}
-        />
       </div>
-      <SavedPercentages
-        oneRepMax={oneRepMax}
-        percentages={savedPercentages}
-        onRemove={handleRemovePercentage}
-        rounding={rounding}
-        barbellWeight={barbellWeight}
-        availablePlates={availablePlates}
-      />
+
+      {mode === 'oneRM' && (
+        <section aria-label='Exercise' className='settings-container'>
+          <ExerciseSelector
+            exercises={exercises}
+            selectedExercise={selectedExercise}
+            onChange={setSelectedExercise}
+          />
+        </section>
+      )}
+
+      {mode === 'oneRM' ? (
+        <>
+          <div className='percentage-container'>
+            <PercentageList
+              onSelect={setSelectedPercentage}
+              oneRepMax={oneRepMax}
+              rounding={rounding}
+              selectedPercentage={selectedPercentage}
+            />
+            <PercentageDetail
+              percentage={selectedPercentage}
+              oneRepMax={oneRepMax}
+              rounding={rounding}
+              onSave={handleSavePercentage}
+            />
+          </div>
+          <SavedPercentages
+            oneRepMax={oneRepMax}
+            percentages={savedPercentages}
+            onRemove={handleRemovePercentage}
+            rounding={rounding}
+            barbellWeight={barbellWeight}
+            availablePlates={availablePlates}
+          />
+        </>
+      ) : (
+        <FreeCalc
+          barbellWeight={barbellWeight}
+          setBarbellWeight={setBarbellWeight}
+          availablePlates={availablePlates}
+        />
+      )}
     </>
   );
 }
