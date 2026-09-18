@@ -1,0 +1,36 @@
+.free-calc {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.free-calc-total {
+  font-size: 2rem;
+  margin-bottom: 0;
+  text-shadow:
+    -1px -1px 0 var(--color-primary-dark),
+    1px -1px 0 var(--color-primary-dark),
+    -1px 1px 0 var(--color-primary-dark),
+    1px 1px 0 var(--color-primary-dark);
+}
+
+.free-calc .plate-viz {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.btn-reset {
+  background-color: var(--color-primary-hover);
+  color: var(--color-white);
+  margin: 0;
+}
+
+.btn-reset:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.free-calc-label {
+  font-weight: 500;
+  margin: 1rem 0 0;
+}
