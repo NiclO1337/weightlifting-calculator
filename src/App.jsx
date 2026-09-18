@@ -63,7 +63,11 @@ function App() {
 
   return (
     <>
-      <Header showTutorial={showTutorial} setShowTutorial={setShowTutorial} />
+      <Header
+        showTutorial={showTutorial}
+        setShowTutorial={setShowTutorial}
+        mode={mode}
+      />
 
       <div className='top-bar'>
         <ModeToggle mode={mode} onChange={setMode} />

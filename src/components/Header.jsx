@@ -3,7 +3,7 @@ import TutorialDriver from './TutorialDriver';
 import { MessageCircleQuestionMark } from 'lucide-react';
 import './Header.css'
 
-export default function Header() {
+export default function Header({ mode }) {
   const tutorialRef = useRef();
 
   return (
@@ -17,7 +17,7 @@ export default function Header() {
         onClick={() => tutorialRef.current?.start()}>
         <MessageCircleQuestionMark size={30} />
         <span className='visually-hidden'>Start Tutorial</span>
-        <TutorialDriver ref={tutorialRef} />
+        <TutorialDriver ref={tutorialRef} mode={mode} />
       </button>
     </div>
   );
