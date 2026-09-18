@@ -1,17 +1,5 @@
-const PLATE_MAP = {
-  25: ['#9c0000', 20, 50],
-  20: ['#0c00b4', 18, 50],
-  15: ['#cfc100', 15, 50],
-  10: ['#008a0b', 12, 50],
-  // 5: ['#ffffff', 7, 32],    // color and size of real 5 kg metal plate
-  5: ['#1b1b1b', 6, 50], // color of a 5 kg plastic plate
-  2.5: ['#9c0000', 6, 30],
-  2: ['#0c00b4', 6, 28],
-  1.5: ['#cfc100', 6, 26],
-  1.25: ['#1b1b1b', 6, 24],
-  1: ['#008a0b', 6, 22],
-  0.5: ['#ffffff', 6, 20],
-};
+import { PLATE_MAP } from '../constants/plates';
+import './BarbellVisualization.css';
 
 export default function BarbellVisualization({
   plates = [], // array of per-side plate sizes, e.g. [20, 10, 2.5]
@@ -19,6 +7,7 @@ export default function BarbellVisualization({
   spacing = 1, // px gap between plates
   barColor = '#cccccc',
   defaultPlate = ['#999', 10, 36],
+  onPlateClick, // optional (index) => void — when provided, plates become clickable/removable
 }) {
   // build plate specs (color, width, height)
   const plateSpecs = plates.map((size) => {
@@ -91,6 +80,19 @@ export default function BarbellVisualization({
               stroke='#cccccc'
               strokeWidth={0.5}
               strokeOpacity={0.5}
+              {...(onPlateClick && {
+                role: 'button',
+                tabIndex: 0,
+                className: 'bv-plate-interactive',
+                'aria-label': `Remove ${p.size} kg plate`,
+                onClick: () => onPlateClick(i),
+                onKeyDown: (e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onPlateClick(i);
+                  }
+                },
+              })}
             />
           </g>
         ))}

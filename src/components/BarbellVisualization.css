@@ -1,0 +1,8 @@
+.bv-plate-interactive {
+  cursor: pointer;
+}
+
+.bv-plate-interactive:focus-visible {
+  outline: 2px solid var(--color-primary-hover);
+  outline-offset: 1px;
+}
