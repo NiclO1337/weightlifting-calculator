@@ -1,9 +1,17 @@
 import { screen, render } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 import FreeCalc from './FreeCalc';
 
 describe('FreeCalc', () => {
+  beforeEach(() => {
+    localStorage.setItem('freeCalcPlates', JSON.stringify([]));
+  });
+
+  afterEach(() => {
+    localStorage.clear();
+  });
+
   const renderComponent = (props = {}) => {
     const user = userEvent.setup();
     const setBarbellWeight = vi.fn();
@@ -65,5 +73,30 @@ describe('FreeCalc', () => {
     await user.click(screen.getByRole('button', { name: /^15 kg$/i }));
 
     expect(setBarbellWeight).toHaveBeenCalledWith(15);
+  });
+
+  it('starts with two 20 kg plates when nothing is stored', () => {
+    localStorage.clear();
+    renderComponent();
+
+    expect(getTotal()).toHaveTextContent('100 kg');
+    expect(
+      screen.getAllByRole('button', { name: /remove 20 kg plate/i }),
+    ).toHaveLength(2);
+  });
+
+  it('restores stored plates on load', () => {
+    localStorage.setItem('freeCalcPlates', JSON.stringify([10, 5]));
+    renderComponent();
+
+    expect(getTotal()).toHaveTextContent('50 kg');
+  });
+
+  it('saves plate changes to local storage', async () => {
+    const { user } = renderComponent();
+
+    await user.click(screen.getByRole('button', { name: /add 10 kg plate/i }));
+
+    expect(JSON.parse(localStorage.getItem('freeCalcPlates'))).toEqual([10]);
   });
 });

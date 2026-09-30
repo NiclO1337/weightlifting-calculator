@@ -14,6 +14,7 @@ describe('App', () => {
     availablePlates: null,
     savedPercentages: [73, 77, 81],
     rounding: 0.5,
+    freeCalcPlates: [],
   };
 
   const seedLocalStorage = (overrides = {}) => {

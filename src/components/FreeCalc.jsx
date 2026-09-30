@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import BarbellVisualization from './BarbellVisualization';
 import BarbellWeightToggle from './BarbellWeightToggle';
 import PlatePalette from './PlatePalette';
 import './FreeCalc.css';
 
 export default function FreeCalc({ barbellWeight, setBarbellWeight }) {
-  const [plates, setPlates] = useState([]); // per-side, not persisted
+  const [plates, setPlates] = useLocalStorage('freeCalcPlates', [20, 20]); // per-side
 
   const totalWeight = barbellWeight + 2 * plates.reduce((sum, p) => sum + p, 0);
 
