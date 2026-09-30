@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { MAX_PLATES_PER_SIDE } from '../constants/plates';
 import BarbellVisualization from './BarbellVisualization';
 import BarbellWeightToggle from './BarbellWeightToggle';
 import PlatePalette from './PlatePalette';
@@ -9,13 +11,25 @@ export default function FreeCalc({ barbellWeight, setBarbellWeight }) {
 
   const totalWeight = barbellWeight + 2 * plates.reduce((sum, p) => sum + p, 0);
 
-  const handleAdd = (size) =>
+  const [isFull, setIsFull] = useState(false);
+
+  const handleAdd = (size) => {
+    if (plates.length >= MAX_PLATES_PER_SIDE) {
+      setIsFull(true);
+      return;
+    }
     setPlates((prev) => [...prev, size].sort((a, b) => b - a));
+  };
 
-  const handleRemove = (index) =>
+  const handleRemove = (index) => {
     setPlates((prev) => prev.filter((_, i) => i !== index));
+    setIsFull(false);
+  };
 
-  const handleClear = () => setPlates([]);
+  const handleClear = () => {
+    setPlates([]);
+    setIsFull(false);
+  };
 
   return (
     <section aria-label='Free calc' className='free-calc'>
@@ -23,6 +37,11 @@ export default function FreeCalc({ barbellWeight, setBarbellWeight }) {
       <div className='plate-viz'>
         <BarbellVisualization plates={plates} onPlateClick={handleRemove} />
       </div>
+      {isFull && (
+        <p role='alert' className='free-calc-error'>
+          The bar is full. Max {MAX_PLATES_PER_SIDE} plates per side.
+        </p>
+      )}
       <button
         type='button'
         className='btn btn-reset'

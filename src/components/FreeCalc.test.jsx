@@ -1,3 +1,4 @@
+import { MAX_PLATES_PER_SIDE } from '../constants/plates';
 import { screen, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
@@ -98,5 +99,53 @@ describe('FreeCalc', () => {
     await user.click(screen.getByRole('button', { name: /add 10 kg plate/i }));
 
     expect(JSON.parse(localStorage.getItem('freeCalcPlates'))).toEqual([10]);
+  });
+
+  describe('plate limit', () => {
+    const fillBar = () =>
+      localStorage.setItem(
+        'freeCalcPlates',
+        JSON.stringify(Array(MAX_PLATES_PER_SIDE).fill(1)),
+      );
+
+    it('shows an error and does not add a plate when the bar is full', async () => {
+      fillBar();
+      const { user } = renderComponent();
+
+      await user.click(screen.getByRole('button', { name: /add 20 kg plate/i }));
+
+      expect(screen.getByRole('alert')).toHaveTextContent(/bar is full/i);
+      expect(getTotal()).toHaveTextContent('40 kg');
+    });
+
+    it('does not show an error while the bar has room', async () => {
+      const { user } = renderComponent();
+
+      await user.click(screen.getByRole('button', { name: /add 20 kg plate/i }));
+
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    });
+
+    it('hides the error when a plate is removed', async () => {
+      fillBar();
+      const { user } = renderComponent();
+
+      await user.click(screen.getByRole('button', { name: /add 20 kg plate/i }));
+      await user.click(
+        screen.getAllByRole('button', { name: /remove 1 kg plate/i })[0],
+      );
+
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    });
+
+    it('hides the error when the bar is cleared', async () => {
+      fillBar();
+      const { user } = renderComponent();
+
+      await user.click(screen.getByRole('button', { name: /add 20 kg plate/i }));
+      await user.click(screen.getByRole('button', { name: /clear bar/i }));
+
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    });
   });
 });
