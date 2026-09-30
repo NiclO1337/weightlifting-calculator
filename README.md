@@ -23,6 +23,8 @@ Instead of doing the math in your head or looking up tables, this app shows you 
 
 ✅ Get plate breakdowns for your barbell (based on available plates).
 
+✅ Load a barbell plate by plate and see the total weight instantly with Free Calc.
+
 ✅ Works directly in your browser — no installation required (but you can install it as a PWA if you want offline support).
 
 ## 🔑 Key Features
@@ -41,7 +43,21 @@ Instead of doing the math in your head or looking up tables, this app shows you 
 
 - Barbell Plate Calculator – see which plates to load on each side of the bar, based on available weight plates.
 
-- Local Storage Support – your settings and saved percentages persist even if you close the browser.
+- Free Calc – switch mode at the top to build a lift by hand instead of starting from a 1RM:
+
+  - Tap a plate to add it to the bar and tap a plate on the bar to remove it. "Clear bar" empties it.
+
+  - The total weight (barbell + plates on both sides) updates as you go.
+
+  - Choose your barbell weight (15kg or 20kg).
+
+  - All plate sizes are always available here, regardless of your plate settings.
+
+  - Max 10 plates per side – you get an error message if you try to add more.
+
+  - The bar starts with two 20kg plates on your first visit, and your last setup is remembered next time.
+
+- Local Storage Support – your settings, saved percentages and Free Calc plates persist even if you close the browser.
 
 
 
