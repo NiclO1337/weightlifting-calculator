@@ -1,10 +1,8 @@
-import { PLATE_MAP, DEFAULT_PLATES } from '../constants/plates';
+import { PLATE_MAP, PLATE_OPTIONS } from '../constants/plates';
 import './PlatePalette.css';
 
-export default function PlatePalette({ availablePlates, onSelect }) {
-  const plates = (availablePlates ?? DEFAULT_PLATES)
-    .slice()
-    .sort((a, b) => b - a);
+export default function PlatePalette({ onSelect }) {
+  const plates = PLATE_OPTIONS.slice().sort((a, b) => b - a);
 
   return (
     <section aria-label='Plate palette' className='plate-palette'>

@@ -122,7 +122,6 @@ function App() {
         <FreeCalc
           barbellWeight={barbellWeight}
           setBarbellWeight={setBarbellWeight}
-          availablePlates={availablePlates}
         />
       )}
     </>

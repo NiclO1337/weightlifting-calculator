@@ -4,11 +4,7 @@ import BarbellWeightToggle from './BarbellWeightToggle';
 import PlatePalette from './PlatePalette';
 import './FreeCalc.css';
 
-export default function FreeCalc({
-  barbellWeight,
-  setBarbellWeight,
-  availablePlates,
-}) {
+export default function FreeCalc({ barbellWeight, setBarbellWeight }) {
   const [plates, setPlates] = useState([]); // per-side, not persisted
 
   const totalWeight = barbellWeight + 2 * plates.reduce((sum, p) => sum + p, 0);
@@ -40,7 +36,7 @@ export default function FreeCalc({
         onChange={setBarbellWeight}
       />
       <p className='free-calc-label'>Weightplates:</p>
-      <PlatePalette availablePlates={availablePlates} onSelect={handleAdd} />
+      <PlatePalette onSelect={handleAdd} />
     </section>
   );
 }

@@ -15,7 +15,6 @@ describe('FreeCalc', () => {
         <FreeCalc
           barbellWeight={20}
           setBarbellWeight={setBarbellWeight}
-          availablePlates={[20, 10]}
           {...props}
         />,
       ),
