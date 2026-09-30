@@ -34,3 +34,12 @@
   font-weight: 500;
   margin: 1rem 0 0;
 }
+
+.free-calc-error {
+  background-color: var(--color-danger);
+  color: white;
+  font-weight: 500;
+  margin: 0.5rem;
+  display: inline;
+  padding: 0.1rem 0.5rem 0.3rem;
+}

@@ -4,8 +4,6 @@ import './App.css';
 import Header from './components/Header';
 import ExerciseSelector from './components/ExerciseSelector';
 import SettingsMenu from './components/SettingsMenu';
-import RoundingSelector from './components/RoundingSelector';
-import BarbellSelector from './components/BarbellSelector';
 import PercentageList from './components/PercentageList';
 import PercentageDetail from './components/PercentageDetail';
 import SavedPercentages from './components/SavedPercentages';
@@ -122,7 +120,6 @@ function App() {
         <FreeCalc
           barbellWeight={barbellWeight}
           setBarbellWeight={setBarbellWeight}
-          availablePlates={availablePlates}
         />
       )}
     </>

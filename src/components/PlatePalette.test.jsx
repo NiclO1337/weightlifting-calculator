@@ -2,7 +2,7 @@ import { screen, render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from '@testing-library/user-event';
 import PlatePalette from './PlatePalette';
-import { DEFAULT_PLATES } from '../constants/plates';
+import { PLATE_OPTIONS } from '../constants/plates';
 
 describe('PlatePalette', () => {
   const renderComponent = (props = {}) => {
@@ -13,25 +13,25 @@ describe('PlatePalette', () => {
       user,
       onSelect,
       ...render(
-        <PlatePalette availablePlates={null} onSelect={onSelect} {...props} />,
+        <PlatePalette onSelect={onSelect} {...props} />,
       ),
     };
   };
 
-  it('renders a button for every default plate size when none are configured', () => {
+  it('renders a button for every plate size', () => {
     renderComponent();
 
-    expect(screen.getAllByRole('button')).toHaveLength(DEFAULT_PLATES.length);
+    expect(screen.getAllByRole('button')).toHaveLength(PLATE_OPTIONS.length);
   });
 
-  it('renders a button only for configured available plates', () => {
+  it('ignores the configured available plates', () => {
     renderComponent({ availablePlates: [20, 10] });
 
-    expect(screen.getAllByRole('button')).toHaveLength(2);
+    expect(screen.getAllByRole('button')).toHaveLength(PLATE_OPTIONS.length);
   });
 
   it('calls onSelect with the clicked plate size', async () => {
-    const { user, onSelect } = renderComponent({ availablePlates: [20, 10] });
+    const { user, onSelect } = renderComponent();
 
     await user.click(screen.getByRole('button', { name: /20 kg/i }));
 
